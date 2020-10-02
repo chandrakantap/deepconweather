@@ -1,0 +1,27 @@
+.root{
+    display: grid;
+    grid-template-columns: 1fr 150px 80px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(20, 20, 20, 0.08) 50px 50px 100px 0px;
+    width: 100%;
+    height: 150px;
+    background-color: #ffffff;
+    margin-bottom:1rem;
+    padding: 1rem 3rem;
+    cursor: pointer;
+}
+.root:hover{
+    background-color: #e0f2f1;
+}
+
+.cityName{
+    text-transform: capitalize;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.temperature{
+    font-size: 3rem;
+    font-weight: 300;
+}
