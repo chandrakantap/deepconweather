@@ -1,16 +1,17 @@
-export const sliceName = 'cityDetail';
+export const sliceName = 'userNotes';
+
 const initialState = {
     isLoaded: false,
     isError: false,
-    data: {},
+    data: [],
     error: ''
 }
 
 export const ACTION_TYPES = {
-    SET_IS_LOADED: 'CITY_DETAIL_SET_IS_LOADED',
-    SET_DATA: 'CITY_DETAIL_SET_DATA',
-    SET_ERROR: 'CITY_DETAIL_SET_ERROR',
-    CLEAR: 'CITY_DETAIL_CLEAR_STATE'
+    SET_IS_LOADED: 'USER_NOTES_SET_IS_LOADED',
+    SET_DATA: 'USER_NOTES_SET_DATA',
+    SET_ERROR: 'USER_NOTES_SET_ERROR',
+    CLEAR: 'USER_NOTES_CLEAR_STATE'
 }
 
 export default function (state = initialState, action) {

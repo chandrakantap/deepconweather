@@ -1,5 +1,5 @@
-import { sliceName } from './cityWeatherListPageReducer';
+import { sliceName } from './cityWeatherDetailPageReducer';
 
 
-export const cityListSelector = (state) => state[sliceName].data;
-export const isCityListLoadedSelector = (state) => state[sliceName].isLoaded;
+export const cityWeatherDetailsSelector = (state) => state[sliceName].data;
+export const isDetailsLoadedSelector = (state) => state[sliceName].isLoaded;

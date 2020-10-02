@@ -41,9 +41,20 @@ function toggleFavourite({ name, country }) {
 
 function removeCity({ name, country }) {
     const listPageCities = getCityList();
-    const cityNameCountry = `${name},${country}`;
-    const updatedCityData = listPageCities.filter(cityData => cityData.name !== cityNameCountry);
+    const cityNameCountry = `${name},${country}`.toLocaleLowerCase();
+    const updatedCityData = listPageCities.filter(cityData => cityData.name.toLocaleLowerCase() !== cityNameCountry);
     localStorage.setItem(LIST_PAGE_CITIES_SK, JSON.stringify(updatedCityData));
 }
 
-export default { getListPageCitiesData, toggleFavourite, removeCity }
+function addCity({ name, country, isFavourite = false }) {
+    const listPageCities = getCityList();
+    const cityNameCountry = `${name},${country}`;
+
+    const existing = listPageCities.find(cityData => cityData.name.toLocaleLowerCase() === cityNameCountry.toLocaleLowerCase());
+    if (!existing) {
+        const updatedCityData = [...listPageCities, { name: cityNameCountry, isFavourite }];
+        localStorage.setItem(LIST_PAGE_CITIES_SK, JSON.stringify(updatedCityData));
+    }
+}
+
+export default { getCityDetail, getListPageCitiesData, toggleFavourite, addCity, removeCity }

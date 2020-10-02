@@ -23,7 +23,7 @@ function App({ children }) {
         <Switch>
           <Route exact path="/" component={CityWeatherListPage} />
           <Route exact path="/list" component={CityWeatherListPage} />
-          <Route exact path="/detail/:name/:country" component={CityWeatherDetailPage} />
+          <Route exact path="/detail/:cityname/:country" component={CityWeatherDetailPage} />
         </Switch>
       </Router>
     </Provider>
