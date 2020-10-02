@@ -12,14 +12,6 @@ describe('CityWeatherListPageReducer properly returns next state on', () => {
         expect(CityWeatherListPageReducer(initialState, { type: 'DIFF_ACTTION' })).toBe(initialState)
     });
 
-    test('set loading action', () => {
-        const nextState = CityWeatherListPageReducer(
-            initialState,
-            actions.setCitListLoadingAction(true)
-        );
-        expect(nextState.isLoading).toBe(true);
-    });
-
     test('set data action', () => {
         const cityData = [
             {
@@ -31,19 +23,19 @@ describe('CityWeatherListPageReducer properly returns next state on', () => {
         ];
         const nextState = CityWeatherListPageReducer(
             initialState,
-            actions.setCitListDataAction(cityData)
+            actions.setCityListDataAction(cityData)
         );
         expect(nextState.data.length).toBe(1);
-        expect(nextState.isLoading).toBe(false);
+        expect(nextState.isLoaded).toBe(true);
         expect(nextState.data[0].temperature).toBe(29);
     });
 
     test('set list load error action', () => {
         const nextState = CityWeatherListPageReducer(
             initialState,
-            actions.setCitListLoadErrorAction("Some error occured")
+            actions.setCityListLoadErrorAction("Some error occured")
         );
-        expect(nextState.isLoading).toBe(false);
+        expect(nextState.isLoaded).toBe(true);
         expect(nextState.isError).toBe(true);
     });
 })

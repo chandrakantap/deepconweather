@@ -1,12 +1,11 @@
 import { ACTION_TYPES } from './cityWeatherListPageReducer';
 import { cityListSelector } from './cityWeatherListPageSelectors';
-import * as weatherService from 'services/weatherService';
-import * as userPreferenceService from 'services/userPreferenceService';
+import cityWeatherService from 'services/cityWeatherService';
 
 export function loadCityListAction() {
     return async (dispatch) => {
         try {
-            const listPageCitiesData = await weatherService.getListPageCitiesData();
+            const listPageCitiesData = await cityWeatherService.getListPageCitiesData();
             dispatch(setCityListDataAction(listPageCitiesData));
         } catch (e) {
             console.error(e);
@@ -40,7 +39,7 @@ export function toggleFavouriteAction({ name, country }) {
                     : cityData
             });
             dispatch(setCityListDataAction(updatedCityData));
-            userPreferenceService.toggleFavourite({ name, country });
+            cityWeatherService.toggleFavourite({ name, country });
         } catch (e) {
             console.error(e);
 
@@ -51,7 +50,7 @@ export function toggleFavouriteAction({ name, country }) {
 export function removeCityAction({ name, country }) {
     return async (dispatch, getState) => {
         try {
-            userPreferenceService.removeCity({ name, country });
+            cityWeatherService.removeCity({ name, country });
             const state = getState();
             const listPageCitiesData = cityListSelector(state);
             const updatedCityData = listPageCitiesData.filter(cityData => !(cityData.name === name

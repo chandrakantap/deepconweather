@@ -12,6 +12,7 @@ function SingleCityInfo({ city, onClickFavourite, onClickRemove }) {
     const onClickDeleteButton = () => {
         onClickRemove(city);
     }
+    const key = `${city.name}_${city.country}`;
     return (<section className={styles.root}>
         <div>
             <h1 className={styles.cityName}>{city.name}</h1>
@@ -19,11 +20,14 @@ function SingleCityInfo({ city, onClickFavourite, onClickRemove }) {
         </div>
         <h2 className={styles.temperature}>{city.current.temperature} &#8451;</h2>
         <div>
-            <IconButton className={styles.favouriteIcon} onClick={onClickFavButton}>
+            <IconButton className={styles.favouriteIcon}
+                onClick={onClickFavButton} data-testid={`${key}_favBtn`}>
                 {city.isFavourite ? <MdFavorite /> : <MdFavoriteBorder />}
             </IconButton>
         </div>
-        <IconButton className={clsx(styles.deleteIcon, 'visibleOnHover')} onClick={onClickDeleteButton}>
+        <IconButton className={clsx(styles.deleteIcon, 'visibleOnHover')}
+            data-testid={`${key}_deleteBtn`}
+            onClick={onClickDeleteButton}>
             <MdClear />
         </IconButton>
     </section>);
