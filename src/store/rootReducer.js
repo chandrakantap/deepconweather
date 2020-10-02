@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
-import CityWeatherListPageReducer,
-{ sliceName as cityWeatherListSliceName } from 'domains/cityweatherlist/store/CityWeatherListPageReducer';
+import cityWeatherListPageReducer, {
+    sliceName as cityListSliceName
+} from 'domains/cityweatherlist/store/cityWeatherListPageReducer';
+
 
 export default combineReducers({
-    [cityWeatherListSliceName]: CityWeatherListPageReducer
+    [cityListSliceName]: cityWeatherListPageReducer
 })

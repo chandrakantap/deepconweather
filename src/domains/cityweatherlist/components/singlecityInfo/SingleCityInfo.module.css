@@ -10,6 +10,7 @@
     margin-bottom:1rem;
     padding: 1rem 3rem;
     cursor: pointer;
+    position: relative;
 }
 .root:hover{
     background-color: #e0f2f1;
@@ -20,8 +21,23 @@
     font-size: 2rem;
     font-weight: 400;
 }
+.countryName{
+    text-transform: capitalize;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color:#9e9e9e;
+}
 
 .temperature{
     font-size: 3rem;
     font-weight: 300;
+}
+.favouriteIcon{
+    font-size: 3rem;
+}
+.deleteIcon{
+    font-size: 20px;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
 }
