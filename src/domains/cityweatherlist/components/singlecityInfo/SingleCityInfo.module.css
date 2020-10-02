@@ -6,14 +6,15 @@
     box-shadow: rgba(20, 20, 20, 0.08) 50px 50px 100px 0px;
     width: 100%;
     height: 150px;
-    background-color: #ffffff;
-    margin-bottom:1rem;
+    margin-bottom: 1rem;
     padding: 1rem 3rem;
     cursor: pointer;
     position: relative;
+    color: #fff;
+    opacity: 0.8;
 }
 .root:hover{
-    background-color: #e0f2f1;
+    background-color: #BC6B83;
 }
 
 .cityName{
@@ -25,7 +26,6 @@
     text-transform: capitalize;
     font-size: 1.2rem;
     font-weight: 400;
-    color:#9e9e9e;
 }
 
 .temperature{

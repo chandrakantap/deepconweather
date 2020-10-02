@@ -1,9 +1,16 @@
 import React from 'react';
-
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import rootReducer from 'store/rootReducer';
+
+import CityWeatherListPage from 'domains/cityweatherlist/components/CityWeatherListPage';
+import CityWeatherDetailPage from 'domains/weatherdetail/components/CityWeatherDetailPage';
 
 const middlewares = [thunk];
 const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
@@ -12,7 +19,13 @@ const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middl
 function App({ children }) {
   return (
     <Provider store={store}>
-      {children}
+      <Router>
+        <Switch>
+          <Route exact path="/" component={CityWeatherListPage} />
+          <Route exact path="/list" component={CityWeatherListPage} />
+          <Route exact path="/detail/:name/:country" component={CityWeatherDetailPage} />
+        </Switch>
+      </Router>
     </Provider>
   );
 }

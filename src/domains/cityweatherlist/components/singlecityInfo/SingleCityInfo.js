@@ -6,10 +6,14 @@ import styles from './SingleCityInfo.module.css';
 
 
 function SingleCityInfo({ city, onClickFavourite, onClickRemove }) {
-    const onClickFavButton = () => {
+    const onClickFavButton = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         onClickFavourite(city);
     }
-    const onClickDeleteButton = () => {
+    const onClickDeleteButton = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         onClickRemove(city);
     }
     const key = `${city.name}_${city.country}`;

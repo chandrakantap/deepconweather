@@ -1,20 +1,20 @@
-export const sliceName = 'citylist';
+export const sliceName = 'cityDetail';
 const initialState = {
     isLoaded: false,
     isError: false,
-    data: [],
+    data: {},
     error: ''
 }
 
 export const ACTION_TYPES = {
-    SET_IS_LOADED: 'CITY_LIST_SET_IS_LOADED',
-    SET_LIST_DATA: 'CITY_LIST_SET_CITY_LIST_DATA',
-    SET_ERROR: 'CITY_LIST_SET_ERROR',
+    SET_IS_LOADED: 'CITY_DETAIL_SET_IS_LOADED',
+    SET_DATA: 'CITY_DETAIL_SET_DATA',
+    SET_ERROR: 'CITY_DETAIL_SET_ERROR',
 }
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case ACTION_TYPES.SET_LIST_DATA: {
+        case ACTION_TYPES.SET_DATA: {
             return {
                 ...state,
                 isLoaded: true,

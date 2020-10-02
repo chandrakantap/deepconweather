@@ -11,5 +11,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: calc(100vh);
   overflow: auto;
-  background-color: #F5F5F5;
+  background-attachment: cover;
+  background: #355C7D;
+  background: -webkit-linear-gradient(to left, #C06C84, #6C5B7B, #355C7D);
+  background: linear-gradient(to left, #C06C84, #6C5B7B, #355C7D);
+
+}
+a{
+  text-decoration: none;
+  color: inherit;
 }

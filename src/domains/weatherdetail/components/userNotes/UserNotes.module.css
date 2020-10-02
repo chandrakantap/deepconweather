@@ -1,0 +1,29 @@
+.singleNote{
+    border-bottom: 1px solid #EDEDED;
+    padding: 1.5rem 0 1rem 1.5rem;
+}
+.noteText{
+    text-align: justify;
+    font-size: 1rem;
+}
+.noteDate{
+    font-size: 0.7rem;
+    margin-top: 5px;
+}
+.addUserNote{
+    padding: 1.5rem 0 1rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+.addUserNote textarea{
+    padding: 0.7rem;
+    outline: none;
+    font-size: 1rem;
+    font-family: inherit;
+}
+.addUserNote button{
+    padding: 1rem;
+    outline: none;
+    font-size: 1rem;
+    cursor: pointer;
+}

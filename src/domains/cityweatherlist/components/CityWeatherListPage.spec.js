@@ -1,16 +1,18 @@
 import React from 'react';
 import {
-    render, fireEvent,
+    fireEvent,
     waitForDomChange,
     screen, cleanup
 } from '@testing-library/react';
+import { render } from 'common/test-utils';
 import CityWeatherListPage from './CityWeatherListPage';
 import App from 'App';
 import weatherService from 'services/weatherService';
 
 describe('CityWeatherListPage', () => {
+    let getCityWeatherSpy;
     beforeAll(() => {
-        jest.spyOn(weatherService, 'getCityWeather').mockImplementation((cityName) => {
+        getCityWeatherSpy = jest.spyOn(weatherService, 'getCityWeather').mockImplementation((cityName) => {
             const cityData = cityName.split(',');
             return Promise.resolve({
                 "name": cityData[0],
@@ -43,9 +45,12 @@ describe('CityWeatherListPage', () => {
     afterEach(() => {
         cleanup();
     });
+    afterAll(() => {
+        getCityWeatherSpy.restore();
+    })
 
     test('should display 15 cities by default', async () => {
-        const { container } = render(<CityWeatherListPage />, { wrapper: App });
+        const { container } = render(<CityWeatherListPage />);
         await waitForDomChange();
         expect(container.querySelectorAll('main.cityList section.root').length).toBe(15);
     });
@@ -58,7 +63,7 @@ describe('CityWeatherListPage', () => {
                 {"name":"Delhi,India","isFavourite":true}\
             ]'
         );
-        const { container } = render(<CityWeatherListPage />, { wrapper: App });
+        const { container } = render(<CityWeatherListPage />);
         await waitForDomChange();
         expect(container.querySelectorAll('main.cityList section.root').length).toBe(2);
     });
@@ -73,7 +78,7 @@ describe('CityWeatherListPage', () => {
                 {"name": "Mexico City,Mexico", "isFavourite": false}\
             ]'
         );
-        const { container } = render(<CityWeatherListPage />, { wrapper: App });
+        const { container } = render(<CityWeatherListPage />);
         await waitForDomChange();
         fireEvent.click(screen.queryByTestId('Tokyo_Japan_deleteBtn'));
         expect(container.querySelectorAll('main.cityList section.root').length).toBe(3);
@@ -86,7 +91,7 @@ describe('CityWeatherListPage', () => {
                 {"name":"Tokyo,Japan","isFavourite":false}\
             ]'
         );
-        const { container } = render(<CityWeatherListPage />, { wrapper: App });
+        const { container } = render(<CityWeatherListPage />);
         await waitForDomChange();
         fireEvent.click(screen.queryByTestId('Tokyo_Japan_favBtn'));
         expect(container).toMatchSnapshot();

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
+import { Link } from 'react-router-dom';
 import Throbber from 'common/ui/Throbber'
 import SingleCityInfo from 'domains/cityweatherlist/components/singlecityInfo/SingleCityInfo';
 import {
@@ -39,16 +40,22 @@ function CityWeatherListPage() {
     const onClickRemove = (city) => {
         dispatch(removeCityAction(city));
     }
+    if (!isCityListLoaded) {
+        return <section>
+            <Throbber />
+        </section>
+    }
 
     return (<section>
-        {!isCityListLoaded && <Throbber />}
         <header className={styles.header}>
             <h1>City Weather Info</h1>
         </header>
         <main className={styles.cityList}>
-            {cityList.map(city => <SingleCityInfo city={city} key={city.name + city.country}
-                onClickFavourite={onClickFavourite}
-                onClickRemove={onClickRemove} />)}
+            {cityList.map(city => <Link to={`/detail/${city.name}/${city.country}`} key={city.name + city.country}>
+                <SingleCityInfo city={city}
+                    onClickFavourite={onClickFavourite}
+                    onClickRemove={onClickRemove} />
+            </Link>)}
         </main>
     </section>)
 };

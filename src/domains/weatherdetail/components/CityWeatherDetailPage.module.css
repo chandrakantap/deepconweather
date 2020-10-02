@@ -1,0 +1,20 @@
+.detailPageRoot{
+    position: relative;
+    height: calc(100vh);
+    overflow: auto;
+    background: #2980b9;
+    background: -webkit-linear-gradient(to right, #2c3e50, #2980b9);
+    background: linear-gradient(to right, #2c3e50, #2980b9);
+    color: #fff;
+}
+.backButton{
+    margin: 2rem ;
+    color: #fff;
+    font-size: 2rem;
+}
+.lowerSection{
+    display: grid;
+    grid-template-columns:1fr 0.4fr 1fr;
+    align-items: start;
+    margin: 3rem 6rem;
+}

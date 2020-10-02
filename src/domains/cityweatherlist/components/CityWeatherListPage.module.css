@@ -4,6 +4,7 @@
 .header h1{
     font-weight: 500;
     font-size: 2rem;
+    color: #eee;
 }
 .cityList{
     margin: 4rem auto;

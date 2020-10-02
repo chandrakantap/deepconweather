@@ -1,28 +1,13 @@
 import { ACTION_TYPES } from './cityWeatherListPageReducer';
-import { cityListSelector, isCityListLoadedSelector } from './cityWeatherListPageSelectors';
+import { cityListSelector } from './cityWeatherListPageSelectors';
 import cityWeatherService from 'services/cityWeatherService';
 
-const cityDataSortFunction = (a, b) => {
-    if (a.isFavourite !== b.isFavourite) {
-        return a.isFavourite ? -1 : 1;
-    } else {
-        return a.name.localeCompare(b.name);
-    }
-};
-
 export function loadCityListAction() {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         try {
-            const state = getState();
-            const isDataLoaded = isCityListLoadedSelector(state);
-            let listPageCitiesData;
-            if (isDataLoaded) {
-                listPageCitiesData = [...cityListSelector(state)];
-            } else {
-                dispatch(setCityLoaded(false));
-                listPageCitiesData = await cityWeatherService.getListPageCitiesData();
-            }
-            dispatch(setCityListDataAction(listPageCitiesData.sort(cityDataSortFunction)));
+            dispatch(setCityLoaded(false));
+            const listPageCitiesData = await cityWeatherService.getListPageCitiesData();
+            dispatch(setCityListDataAction(listPageCitiesData));
         } catch (e) {
             console.error(e);
             dispatch(setCityListLoadErrorAction("Unable to load listPageCitiesData"));

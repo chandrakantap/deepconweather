@@ -15,13 +15,6 @@ function getCityList() {
     return listPageCities;
 }
 
-const cityDataSortFunction = (a, b) => {
-    if (a.isFavourite !== b.isFavourite) {
-        return a.isFavourite ? -1 : 1;
-    } else {
-        return a.name.localeCompare(b.name);
-    }
-};
 
 async function getCityDetail(city) {
     const { name, country, current } = await weatherService.getCityWeather(city.name);
@@ -30,10 +23,9 @@ async function getCityDetail(city) {
 
 async function getListPageCitiesData() {
     const listPageCities = getCityList();
-    const listPageCitiesData = await Promise.all(
+    return await Promise.all(
         listPageCities.map(city => getCityDetail(city))
     );
-    return listPageCitiesData.sort(cityDataSortFunction);
 }
 
 function toggleFavourite({ name, country }) {
