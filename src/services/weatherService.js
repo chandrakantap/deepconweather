@@ -4,7 +4,11 @@ const apiBaseURL = 'http://api.weatherstack.com';
 const accessKey = process.env.REACT_APP_WS_API_KEY;
 
 const cityDataSortFunction = (a, b) => {
-
+    if (a.isFavourite !== b.isFavourite) {
+        return a.isFavourite ? -1 : 1;
+    } else {
+        return a.name.localeCompare(b.name);
+    }
 };
 
 export async function getListPageCitiesData() {
