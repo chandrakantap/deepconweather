@@ -8,7 +8,7 @@ function getCityList() {
   let listPageCities;
 
   if (!listPageCitiesString) {
-    listPageCities = topCitiesByPopulation.slice(0, 15);
+    listPageCities = topCitiesByPopulation.slice(0, 1);
     localStorage.setItem(LIST_PAGE_CITIES_SK, JSON.stringify(listPageCities));
   } else {
     listPageCities = JSON.parse(listPageCitiesString);
