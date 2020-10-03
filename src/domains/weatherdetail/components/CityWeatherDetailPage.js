@@ -45,7 +45,7 @@ function CityWeatherDetailPage(props) {
             <div className={styles.lowerSection}>
                 <WeatherAttributes />
                 <div />
-                <UserNotes />
+                <UserNotes cityName={cityname} country={country} />
             </div>
         </section>
     )

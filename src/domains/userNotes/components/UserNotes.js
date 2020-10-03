@@ -1,60 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+    loadUserNotesAction,
+    clearStateAction
+} from 'domains/userNotes/store/userNotesActions';
 import AddUserNote from './AddUserNote';
-import styles from './UserNotes.module.css';
+import UserNoteList from './UserNoteList';
 
+function UserNotes(props) {
+    const { cityName, country } = props;
+    const dispatch = useDispatch();
 
-function UserNotes() {
+    useEffect(() => {
+        dispatch(loadUserNotesAction({ name: cityName, country }));
+        return () => { dispatch(clearStateAction()) }
+    }, [dispatch, cityName, country]);
+
     return (
         <div>
-            <AddUserNote />
-            <div className={styles.singleNote}>
-                <p className={styles.noteText}>
-                    Modules that are mocked with jest.mock are mocked only for the file that calls jest.mock.
-                </p>
-                <p className={styles.noteDate}>15th Dec 2020</p>
-            </div>
-            <div className={styles.singleNote}>
-                <p className={styles.noteText}>
-                    Modules that are mocked with jest.mock are mocked only for the file that calls jest.mock.
-                </p>
-                <p className={styles.noteDate}>15th Dec 2020</p>
-            </div>
-            <div className={styles.singleNote}>
-                <p className={styles.noteText}>
-                    Modules that are mocked with jest.mock are mocked only for the file that calls jest.mock.
-                </p>
-                <p className={styles.noteDate}>15th Dec 2020</p>
-            </div>
-            <div className={styles.singleNote}>
-                <p className={styles.noteText}>
-                    Modules that are mocked with jest.mock are mocked only for the file that calls jest.mock.
-                </p>
-                <p className={styles.noteDate}>15th Dec 2020</p>
-            </div>
-            <div className={styles.singleNote}>
-                <p className={styles.noteText}>
-                    Modules that are mocked with jest.mock are mocked only for the file that calls jest.mock.
-                </p>
-                <p className={styles.noteDate}>15th Dec 2020</p>
-            </div>
-            <div className={styles.singleNote}>
-                <p className={styles.noteText}>
-                    Modules that are mocked with jest.mock are mocked only for the file that calls jest.mock.
-                </p>
-                <p className={styles.noteDate}>15th Dec 2020</p>
-            </div>
-            <div className={styles.singleNote}>
-                <p className={styles.noteText}>
-                    Modules that are mocked with jest.mock are mocked only for the file that calls jest.mock.
-                </p>
-                <p className={styles.noteDate}>15th Dec 2020</p>
-            </div>
-            <div className={styles.singleNote}>
-                <p className={styles.noteText}>
-                    Modules that are mocked with jest.mock are mocked only for the file that calls jest.mock.
-                </p>
-                <p className={styles.noteDate}>15th Dec 2020</p>
-            </div>
+            <AddUserNote cityName={cityName} country={country} />
+            <UserNoteList />
         </div>
     )
 }

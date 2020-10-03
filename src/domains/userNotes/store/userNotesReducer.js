@@ -11,7 +11,8 @@ export const ACTION_TYPES = {
     SET_IS_LOADED: 'USER_NOTES_SET_IS_LOADED',
     SET_DATA: 'USER_NOTES_SET_DATA',
     SET_ERROR: 'USER_NOTES_SET_ERROR',
-    CLEAR: 'USER_NOTES_CLEAR_STATE'
+    CLEAR: 'USER_NOTES_CLEAR_STATE',
+    ADD_NOTE: 'USER_NOTES_ADD'
 }
 
 export default function (state = initialState, action) {
@@ -35,6 +36,15 @@ export default function (state = initialState, action) {
                 isLoaded: true,
                 isError: true,
                 error: action.data.error
+            }
+        }
+        case ACTION_TYPES.ADD_NOTE: {
+            return {
+                ...state,
+                data: [
+                    action.data.note,
+                    ...state.data
+                ]
             }
         }
         case ACTION_TYPES.CLEAR: {

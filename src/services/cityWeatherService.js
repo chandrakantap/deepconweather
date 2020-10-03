@@ -1,4 +1,5 @@
 import weatherService from './weatherService';
+import userNoteService from './userNoteService';
 import topCitiesByPopulation from './topCitiesByPopulation';
 
 const LIST_PAGE_CITIES_SK = 'LIST_PAGE_CITIES_SK';
@@ -44,6 +45,7 @@ function removeCity({ name, country }) {
     const cityNameCountry = `${name},${country}`.toLocaleLowerCase();
     const updatedCityData = listPageCities.filter(cityData => cityData.name.toLocaleLowerCase() !== cityNameCountry);
     localStorage.setItem(LIST_PAGE_CITIES_SK, JSON.stringify(updatedCityData));
+    userNoteService.removeUserNoteForCity({ name, country });
 }
 
 function addCity({ name, country, isFavourite = false }) {
