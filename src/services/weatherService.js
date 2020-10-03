@@ -1,4 +1,4 @@
-const apiBaseURL = 'http://api.weatherstack.com';
+const apiBaseURL = 'https://api.weatherstack.com';
 const accessKey = process.env.REACT_APP_WS_API_KEY;
 
 async function getCityWeather(cityName) {
