@@ -1,0 +1,23 @@
+.root {
+  text-align: right;
+  position: relative;
+}
+.searchTxtFld {
+  width: 50%;
+  font-size: 1rem;
+  padding: 1rem;
+  outline: none;
+  -webkit-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+}
+.searchTxtFld.active,
+.searchTxtFld:focus {
+  width: 100%;
+}
+.closeSearchhBtn {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 16px;
+  font-size: 1.5rem;
+}

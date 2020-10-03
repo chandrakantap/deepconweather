@@ -13,6 +13,25 @@ exports[`CityWeatherListPage should set favourite on click favourite icon 1`] = 
     <main
       class="cityList"
     >
+      <div
+        class="citySearchContainer"
+      >
+        <div
+          class="root"
+        >
+          <div
+            class="root"
+          >
+            <input
+              class="searchTxtFld"
+              placeholder="Search for cities..."
+              type="text"
+              value=""
+            />
+            
+          </div>
+        </div>
+      </div>
       <a
         href="/detail/Tokyo/Japan"
       >

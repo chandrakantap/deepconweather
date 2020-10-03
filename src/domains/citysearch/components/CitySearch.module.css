@@ -1,0 +1,36 @@
+.root {
+  position: relative;
+}
+.searchResults {
+  position: absolute;
+  background: white;
+  margin-top: 5px;
+  width: 100%;
+  min-height: 325px;
+  z-index: 9;
+  max-height: 445px;
+  overflow: auto;
+}
+.searchItem {
+  display: block;
+  font-size: 1.1rem;
+  padding: 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid #eedede;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #ededed;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+.searchItem:hover {
+  color: #fff;
+  font-weight: 500;
+  background: #2980b9;
+  background: -webkit-linear-gradient(to right, #2c3e50, #2980b9);
+  background: linear-gradient(to right, #2c3e50, #2980b9);
+}

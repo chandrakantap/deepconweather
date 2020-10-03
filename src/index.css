@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -6,18 +6,16 @@
 
 body {
   margin: 0;
-  font-family: 'Poppins', 'Helvetica Neue', 'sans-serif';
+  font-family: "Poppins", "Helvetica Neue", "sans-serif";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: calc(100vh);
   overflow: auto;
-  background-attachment: cover;
-  background: #355C7D;
-  background: -webkit-linear-gradient(to left, #C06C84, #6C5B7B, #355C7D);
-  background: linear-gradient(to left, #C06C84, #6C5B7B, #355C7D);
-
+  background: #355c7d;
+  background: -webkit-linear-gradient(to left, #c06c84, #6c5b7b, #355c7d);
+  background: linear-gradient(to left, #c06c84, #6c5b7b, #355c7d);
 }
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
