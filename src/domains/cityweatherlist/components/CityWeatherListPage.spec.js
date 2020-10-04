@@ -101,4 +101,33 @@ describe("CityWeatherListPage", () => {
     fireEvent.click(screen.queryByTestId("TOKYO_TOKYO_JAPAN_favBtn"));
     expect(container).toMatchSnapshot();
   });
+  test("should add new city to list", async () => {
+    window.localStorage.setItem(
+      "LIST_PAGE_CITIES_SK",
+      '[\
+          {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN"}\
+      ]'
+    );
+    jest.spyOn(weatherStackApi, "locationLookup").mockResolvedValueOnce([
+      {
+        name: "York",
+        region: "Lancashire",
+        country: "United Kingdom",
+        id: "YORK_LANCASHIRE_UNITED KINGDOM",
+      },
+    ]);
+    const { container } = render(<CityWeatherListPage />);
+    await waitForDomChange();
+    const searchInput = screen.getByPlaceholderText("Search for cities...");
+    fireEvent.change(searchInput, { target: { value: "york" } });
+    await waitForDomChange();
+
+    expect(screen.queryByText("York, Lancashire, United Kingdom")).toBeTruthy();
+    fireEvent.click(screen.queryByText("York, Lancashire, United Kingdom"));
+
+    await waitForDomChange();
+    expect(
+      container.querySelectorAll("main.cityList section.root").length
+    ).toBe(2);
+  });
 });

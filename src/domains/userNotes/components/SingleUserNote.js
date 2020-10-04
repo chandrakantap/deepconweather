@@ -33,10 +33,16 @@ function SingleUserNote({ city, note }) {
         <p className={styles.noteDate}>{note.lastUpdatedOn}</p>
       </div>
       <div className={styles.actionControls}>
-        <IconButton onClick={deleteNote}>
+        <IconButton
+          onClick={deleteNote}
+          data-testid={`${note.uniqueKey}_delete`}
+        >
           <MdClear />
         </IconButton>
-        <IconButton onClick={switchToEditMode}>
+        <IconButton
+          onClick={switchToEditMode}
+          data-testid={`${note.uniqueKey}_edit`}
+        >
           <span className={styles.noteDate}>Edit</span>
         </IconButton>
       </div>
