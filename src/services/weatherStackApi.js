@@ -5,8 +5,8 @@ export async function getCityWeather(query) {
   const response = await fetch(
     `${apiBaseURL}/current?access_key=${accessKey}&query=${query}`
   );
-  const { current } = await response.json();
-  return { current };
+  const { current, location } = await response.json();
+  return { current, location };
 }
 
 export async function locationLookup(query) {

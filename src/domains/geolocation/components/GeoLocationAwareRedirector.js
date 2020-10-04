@@ -12,8 +12,10 @@ class GeoLocationAwareRedirector extends Component {
     const { history } = this.props;
     this.setState({ gotPositionResponse: true });
     const query = `${position.coords.latitude},${position.coords.longitude}`;
-    const { name, country } = await getCityWeather(query);
-    history.push(`/detail/${name}/${country}`);
+    const { location: city } = await getCityWeather(query);
+    history.push(
+      `/detail?cityId=${city.id}&cityName=${city.name}&region=${city.region}&country=${city.country}`
+    );
   };
   geoError = () => {
     const { history } = this.props;
