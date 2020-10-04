@@ -6,24 +6,33 @@ describe("cityWeatherService", () => {
     window.localStorage.setItem(
       "LIST_PAGE_CITIES_SK",
       '[\
-                {"name":"Tokyo,Japan","isFavourite":false},\
-                {"name":"Delhi,India","isFavourite":true},\
-                {"name":"Shanghai,China","isFavourite":false},\
-                {"name": "Mexico City,Mexico", "isFavourite": false}\
-            ]'
+        {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN"},\
+        {"id":"KAGLIPUR_KARNATAKA_INDIA","name":"Kaglipur","region":"Karnataka","country":"India"},\
+        {"name":"Lobong","region":"Pangasinan","country":"Philippines","id":"LOBONG_PANGASINAN_PHILIPPINES","isFavourite":true}\
+      ]'
     );
-    cityWeatherService.addCity({ name: "TokYo", country: "Japan" });
+    cityWeatherService.addCity({
+      name: "TokYo",
+      region: "Tokyo",
+      country: "Japan",
+    });
 
     const updatedItems = JSON.parse(
       window.localStorage.getItem("LIST_PAGE_CITIES_SK")
     );
-    expect(updatedItems.length).toBe(4);
+    expect(updatedItems.length).toBe(3);
   });
   test("shout return weather details of a city", () => {
     const getCityWeatherMock = jest
       .spyOn(weatherStackApi, "getCityWeather")
-      .mockImplementationOnce(() => {});
-    expect(cityWeatherService.getCityDetail({ name: "" }));
+      .mockResolvedValueOnce({ current: {} });
+    expect(
+      cityWeatherService.getCityWeatherDetail({
+        name: "name",
+        region: "region",
+        country: "country",
+      })
+    );
     expect(getCityWeatherMock).toHaveBeenCalled();
   });
 });

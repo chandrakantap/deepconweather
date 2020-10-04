@@ -32,16 +32,12 @@ class SearchInput extends Component {
     }
   };
   callOnChange = () => {
-    if (this.props.onChange) {
-      this.props.onChange(this.state.searchQuery);
-    }
+    this.props.onChange(this.state.searchQuery);
   };
   clearSearch = () => {
     clearTimeout(this.defferedTimeout);
     this.setState({ searchQuery: "" });
-    if (this.props.onChange) {
-      this.props.onChange("");
-    }
+    this.props.onChange("");
   };
   render() {
     const { searchQuery } = this.state;

@@ -7,7 +7,6 @@ import {
 } from "@testing-library/react";
 import { render } from "common/test-utils";
 import CityWeatherListPage from "./CityWeatherListPage";
-import App from "App";
 import * as weatherStackApi from "services/weatherStackApi";
 
 describe("CityWeatherListPage", () => {
@@ -16,10 +15,11 @@ describe("CityWeatherListPage", () => {
     getCityWeatherSpy = jest
       .spyOn(weatherStackApi, "getCityWeather")
       .mockImplementation((cityName) => {
-        const cityData = cityName.split(",");
+        const cityData = cityName.split("_");
         return Promise.resolve({
           name: cityData[0],
-          country: cityData[1],
+          region: cityData[1],
+          country: cityData[2],
           current: {
             observation_time: "02:21 PM",
             temperature: 32,
@@ -62,9 +62,9 @@ describe("CityWeatherListPage", () => {
     window.localStorage.setItem(
       "LIST_PAGE_CITIES_SK",
       '[\
-                {"name":"Tokyo,Japan","isFavourite":false},\
-                {"name":"Delhi,India","isFavourite":true}\
-            ]'
+        {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN"},\
+        {"id":"KAGLIPUR_KARNATAKA_INDIA","name":"Kaglipur","region":"Karnataka","country":"India"}\
+       ]'
     );
     const { container } = render(<CityWeatherListPage />);
     await waitForDomChange();
@@ -77,30 +77,28 @@ describe("CityWeatherListPage", () => {
     window.localStorage.setItem(
       "LIST_PAGE_CITIES_SK",
       '[\
-                {"name":"Tokyo,Japan","isFavourite":false},\
-                {"name":"Delhi,India","isFavourite":true},\
-                {"name":"Shanghai,China","isFavourite":false},\
-                {"name": "Mexico City,Mexico", "isFavourite": false}\
-            ]'
+        {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN"},\
+        {"id":"KAGLIPUR_KARNATAKA_INDIA","name":"Kaglipur","region":"Karnataka","country":"India"}\
+       ]'
     );
     const { container } = render(<CityWeatherListPage />);
     await waitForDomChange();
-    fireEvent.click(screen.queryByTestId("Tokyo_Japan_deleteBtn"));
+    fireEvent.click(screen.queryByTestId("TOKYO_TOKYO_JAPAN_deleteBtn"));
     expect(
       container.querySelectorAll("main.cityList section.root").length
-    ).toBe(3);
+    ).toBe(1);
   });
 
   test("should set favourite on click favourite icon", async () => {
     window.localStorage.setItem(
       "LIST_PAGE_CITIES_SK",
       '[\
-                {"name":"Tokyo,Japan","isFavourite":false}\
-            ]'
+          {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN"}\
+      ]'
     );
     const { container } = render(<CityWeatherListPage />);
     await waitForDomChange();
-    fireEvent.click(screen.queryByTestId("Tokyo_Japan_favBtn"));
+    fireEvent.click(screen.queryByTestId("TOKYO_TOKYO_JAPAN_favBtn"));
     expect(container).toMatchSnapshot();
   });
 });

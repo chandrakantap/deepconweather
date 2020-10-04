@@ -8,7 +8,7 @@ function getCityList() {
   let listPageCities;
 
   if (!listPageCitiesString) {
-    listPageCities = topCitiesByPopulation.slice(0, 1).map((city) => ({
+    listPageCities = topCitiesByPopulation.slice(0, 15).map((city) => ({
       ...city,
       isFavourite: false,
       id: `${city.name}_${city.region}_${city.country}`.toLocaleUpperCase(),
