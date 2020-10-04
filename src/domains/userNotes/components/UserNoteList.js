@@ -1,39 +1,42 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { useSelector } from "react-redux";
 import {
-    isLoadedSelector,
-    userNotesSelector
-} from 'domains/userNotes/store/userNotesSelector';
-import { createSelector } from 'reselect';
-import styles from './UserNotes.module.css';
+  isLoadedSelector,
+  userNotesSelector,
+} from "domains/userNotes/store/userNotesSelector";
+import { cityWeatherDetailsSelector } from "domains/weatherdetail/store/cityWeatherDetailPageSelectors";
+import { createSelector } from "reselect";
+import SingleUserNote from "./SingleUserNote";
 
 const selector = createSelector(
-    userNotesSelector,
-    isLoadedSelector,
-    (userNotes, isLoaded) => ({
-        userNotes,
-        isLoaded
-    })
+  userNotesSelector,
+  isLoadedSelector,
+  cityWeatherDetailsSelector,
+  (userNotes, isLoaded, city) => ({
+    userNotes,
+    isLoaded,
+    city,
+  })
 );
 
 function UserNoteList() {
-    const { isLoaded, userNotes = [] } = useSelector(selector);
-    if (!isLoaded) {
-        return null;
-    }
+  const { isLoaded, city, userNotes = [] } = useSelector(selector);
+  if (!isLoaded) {
+    return null;
+  }
 
-    return (
-        <div>
-            {userNotes.map(note => (
-                <div className={styles.singleNote} key={note.timestamp}>
-                    <p className={styles.noteText}>
-                        {note.text}
-                    </p>
-                    <p className={styles.noteDate}>{note.createdOn}</p>
-                </div>
-            ))}
-        </div>
-    )
+  return (
+    <div>
+      {userNotes.map((note) => (
+        <SingleUserNote
+          note={note}
+          key={note.uniqueKey}
+          name={city.name}
+          country={city.country}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default UserNoteList;

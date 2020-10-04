@@ -1,43 +1,47 @@
-.root{
-    display: grid;
-    grid-template-columns: 1fr 150px 80px;
-    align-items: center;
-    justify-content: center;
-    box-shadow: rgba(20, 20, 20, 0.08) 50px 50px 100px 0px;
-    width: 100%;
-    height: 150px;
-    margin-bottom: 1rem;
-    padding: 1rem 3rem;
-    cursor: pointer;
-    position: relative;
-    color: #fff;
-    opacity: 0.8;
+.root {
+  display: grid;
+  grid-template-columns: 1fr 150px 80px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(20, 20, 20, 0.08) 50px 50px 100px 0px;
+  width: 100%;
+  height: 150px;
+  margin-bottom: 1rem;
+  padding: 1rem 3rem;
+  cursor: pointer;
+  position: relative;
+  color: #fff;
+  opacity: 0.8;
 }
-.root:hover{
-    background-color: #BC6B83;
-}
-
-.cityName{
-    text-transform: capitalize;
-    font-size: 2rem;
-    font-weight: 400;
-}
-.countryName{
-    text-transform: capitalize;
-    font-size: 1.2rem;
-    font-weight: 400;
+.root:hover {
+  background-color: #bc6b83;
 }
 
-.temperature{
-    font-size: 3rem;
-    font-weight: 300;
+.cityName {
+  text-transform: capitalize;
+  font-size: 2rem;
+  font-weight: 400;
 }
-.favouriteIcon{
-    font-size: 3rem;
+.countryName {
+  text-transform: capitalize;
+  font-size: 1.2rem;
+  font-weight: 400;
 }
-.deleteIcon{
-    font-size: 20px;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
+
+.temperature {
+  font-size: 3rem;
+  font-weight: 300;
+}
+.favouriteIcon {
+  font-size: 3rem;
+}
+.deleteIcon {
+  font-size: 1.6rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: none;
+}
+.root:hover .deleteIcon {
+  display: block;
 }

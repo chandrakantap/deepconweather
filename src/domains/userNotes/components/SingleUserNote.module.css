@@ -1,0 +1,26 @@
+.root {
+  border-bottom: 1px solid #ededed;
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+.noteBody {
+  padding: 1.5rem 0 1rem 1.5rem;
+}
+.actionControls {
+  display: none;
+  grid-template-rows: 1fr auto;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  font-size: 1.2rem;
+}
+.root:hover .actionControls {
+  display: grid;
+}
+.noteText {
+  text-align: justify;
+  font-size: 1rem;
+}
+.noteDate {
+  font-size: 0.7rem;
+  margin-top: 5px;
+}
