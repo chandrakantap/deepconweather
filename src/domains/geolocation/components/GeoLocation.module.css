@@ -9,12 +9,6 @@
   box-shadow: rgba(20, 20, 20, 0.08) 50px 50px 100px 0px;
   color: #fff;
 }
-.permissionPrompt button {
-  padding: 1rem;
-  cursor: pointer;
-  margin-top: 2rem;
-  font-family: inherit;
-}
 .loader {
   position: relative;
 }

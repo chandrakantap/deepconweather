@@ -52,7 +52,6 @@ class GeoLocationAwareRedirector extends Component {
             Please allow location permission to view weather details in your
             city.
           </p>
-          <button onClick={this.geoError}>May be later</button>
         </div>
       );
     }
