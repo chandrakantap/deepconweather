@@ -1,19 +1,12 @@
 const apiBaseURL = "https://api.weatherstack.com";
 const accessKey = process.env.REACT_APP_WS_API_KEY;
 
-export async function getCityWeather(cityName) {
+export async function getCityWeather(query) {
   const response = await fetch(
-    `${apiBaseURL}/current?access_key=${accessKey}&query=${cityName}`
+    `${apiBaseURL}/current?access_key=${accessKey}&query=${query}`
   );
-  const {
-    location: { name, country },
-    current,
-  } = await response.json();
-  return {
-    name,
-    country,
-    current,
-  };
+  const { current } = await response.json();
+  return { current };
 }
 
 export async function locationLookup(query) {
@@ -21,9 +14,10 @@ export async function locationLookup(query) {
     `${apiBaseURL}/autocomplete?access_key=${accessKey}&query=${query}`
   );
   const { results = [] } = await response.json();
-  return results.map(({ name, country }) => ({
+  return results.map(({ name, region, country }) => ({
     name,
+    region,
     country,
-    uniqueKey: `${name}_${country}`,
+    id: `${name}_${region}_${country}`.toLocaleUpperCase(),
   }));
 }

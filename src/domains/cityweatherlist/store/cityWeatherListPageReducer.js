@@ -38,10 +38,7 @@ export default function (state = initialState, action) {
     }
     case ACTION_TYPES.ADD_CITY: {
       const { city: newCity } = action.data;
-      const currentCities = state.data.filter(
-        (city) =>
-          !(city.name === newCity.name && city.country === newCity.country)
-      );
+      const currentCities = state.data.filter((city) => city.id !== newCity.id);
       return {
         ...state,
         data: [newCity, ...currentCities],

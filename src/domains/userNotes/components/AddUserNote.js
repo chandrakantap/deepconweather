@@ -4,7 +4,7 @@ import { addUserNoteAction } from "domains/userNotes/store/userNotesActions";
 import NoteEditor from "./NoteEditor";
 
 function AddUserNote(props) {
-  const { cityName, country } = props;
+  const { city } = props;
   const [note, setNote] = useState(props.note || "");
   const dispatch = useDispatch();
 
@@ -19,13 +19,7 @@ function AddUserNote(props) {
         uniqueKey: now.getTime(),
         lastUpdatedOn: now.toLocaleString(),
       };
-      dispatch(
-        addUserNoteAction({
-          note: noteObject,
-          name: cityName,
-          country,
-        })
-      );
+      dispatch(addUserNoteAction(city.id, noteObject));
       setNote("");
     }
   };

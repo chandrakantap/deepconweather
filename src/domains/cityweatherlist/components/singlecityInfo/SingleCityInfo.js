@@ -15,26 +15,27 @@ function SingleCityInfo({ city, onClickFavourite, onClickRemove }) {
     e.stopPropagation();
     onClickRemove(city);
   };
-  const key = `${city.name}_${city.country}`;
   return (
     <section className={styles.root}>
       <div>
         <h1 className={styles.cityName}>{city.name}</h1>
-        <h2 className={styles.countryName}>{city.country}</h2>
+        <h2 className={styles.countryName}>
+          {city.region ? `${city.region}, ${city.country}` : city.country}
+        </h2>
       </div>
       <h2 className={styles.temperature}>{city.current.temperature} &#8451;</h2>
       <div>
         <IconButton
           className={styles.favouriteIcon}
           onClick={onClickFavButton}
-          data-testid={`${key}_favBtn`}
+          data-testid={`${city.id}_favBtn`}
         >
           {city.isFavourite ? <MdFavorite /> : <MdFavoriteBorder />}
         </IconButton>
       </div>
       <IconButton
         className={clsx(styles.deleteIcon, "visibleOnHover")}
-        data-testid={`${key}_deleteBtn`}
+        data-testid={`${city.id}_deleteBtn`}
         onClick={onClickDeleteButton}
       >
         <MdClear />

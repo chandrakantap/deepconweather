@@ -6,13 +6,11 @@ import IconButton from "common/ui/IconButton";
 import EditUserNote from "./EditUserNote";
 import styles from "./SingleUserNote.module.css";
 
-function SingleUserNote({ name, country, note }) {
+function SingleUserNote({ city, note }) {
   const dispatch = useDispatch();
   const [mode, setMode] = useState("view");
   const deleteNote = () => {
-    dispatch(
-      removeUserNoteAction({ name, country, uniqueKey: note.uniqueKey })
-    );
+    dispatch(removeUserNoteAction(city.id, note.uniqueKey));
   };
   const switchToEditMode = () => {
     setMode("edit");
@@ -24,12 +22,7 @@ function SingleUserNote({ name, country, note }) {
   if (mode === "edit") {
     return (
       <div className={styles.root}>
-        <EditUserNote
-          note={note}
-          name={name}
-          country={country}
-          onEditDone={switchToViewMode}
-        />
+        <EditUserNote note={note} city={city} onEditDone={switchToViewMode} />
       </div>
     );
   }

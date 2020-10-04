@@ -1,10 +1,10 @@
 import { ACTION_TYPES } from "./userNotesReducer";
 import userNoteService from "services/userNoteService";
 
-export function loadUserNotesAction({ name, country }) {
+export function loadUserNotesAction(cityId) {
   return async (dispatch) => {
     try {
-      const userNotes = userNoteService.getUserNotes({ name, country });
+      const userNotes = userNoteService.getUserNotes(cityId);
       const sortedUserNotes = userNotes.sort((a, b) =>
         a.timestamp > b.timestamp ? -1 : 1
       );
@@ -16,31 +16,31 @@ export function loadUserNotesAction({ name, country }) {
   };
 }
 
-export function addUserNoteAction({ name, country, note }) {
+export function addUserNoteAction(cityId, note) {
   return async (dispatch) => {
     dispatch({
       type: ACTION_TYPES.ADD_NOTE,
       data: { note },
     });
-    userNoteService.addUserNote({ name, country, note });
+    userNoteService.addUserNote({ cityId, note });
   };
 }
-export function editUserNoteAction({ name, country, note }) {
+export function editUserNoteAction(cityId, note) {
   return async (dispatch) => {
     dispatch({
       type: ACTION_TYPES.EDIT_NOTE,
       data: { note },
     });
-    userNoteService.editUserNote({ name, country, note });
+    userNoteService.editUserNote({ cityId, note });
   };
 }
-export function removeUserNoteAction({ name, country, uniqueKey }) {
+export function removeUserNoteAction(cityId, uniqueKey) {
   return async (dispatch) => {
     dispatch({
       type: ACTION_TYPES.REMOVE_NOTE,
       data: { uniqueKey },
     });
-    userNoteService.removeUserNote({ name, country, uniqueKey });
+    userNoteService.removeUserNote({ cityId, uniqueKey });
   };
 }
 export function clearStateAction() {

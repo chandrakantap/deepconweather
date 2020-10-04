@@ -1,0 +1,38 @@
+.mainDetails {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 0 6rem;
+  font-size: 1.5rem;
+}
+.temperature {
+  font-size: 6rem;
+  font-weight: 200;
+}
+.cityName {
+  align-self: end;
+}
+.cityName h1 {
+  font-size: 3rem;
+  font-weight: 300;
+}
+.cityName h3 {
+  font-weight: 300;
+}
+
+.waRoot {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.waTile {
+  height: 140px;
+  width: 180px;
+  opacity: 0.8;
+  text-align: center;
+  padding-top: 38px;
+  background: #2b4a63;
+}
+.waTile h3 {
+  font-size: 2rem;
+}

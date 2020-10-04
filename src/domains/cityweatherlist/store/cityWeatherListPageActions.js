@@ -18,11 +18,11 @@ export function loadCityListAction() {
     try {
       const state = getState();
       const isDataLoaded = isCityListLoadedSelector(state);
+
       let listPageCitiesData;
       if (isDataLoaded) {
         listPageCitiesData = [...cityListSelector(state)];
       } else {
-        dispatch(setCityLoaded(false));
         listPageCitiesData = await cityWeatherService.getListPageCitiesData();
       }
       dispatch(
@@ -34,23 +34,17 @@ export function loadCityListAction() {
     }
   };
 }
-export function addCityToListAction({ name, country }) {
+export function addCityToListAction(newCity) {
   return async (dispatch, getState) => {
     try {
       const state = getState();
       const cityList = cityListSelector(state);
-      const city = cityList.find(
-        (city) => city.name === name && city.country === country
-      );
-      if (city) {
-        dispatch({ type: ACTION_TYPES.ADD_CITY, data: { city } });
+      const existingCity = cityList.find((city) => city.id === newCity.id);
+      if (existingCity) {
+        dispatch({ type: ACTION_TYPES.ADD_CITY, data: { existingCity } });
       } else {
-        const cityNameCountry = `${name},${country}`;
-        cityWeatherService.addCity({ name, country });
-        const result = await cityWeatherService.getCityDetail({
-          name: cityNameCountry,
-          isFavourite: false,
-        });
+        cityWeatherService.addCity(newCity);
+        const result = await cityWeatherService.getCityWeatherDetail(newCity);
         dispatch({ type: ACTION_TYPES.ADD_CITY, data: { city: result } });
       }
     } catch (e) {
@@ -79,32 +73,32 @@ export function setCityListLoadErrorAction(error) {
   };
 }
 
-export function toggleFavouriteAction({ name, country }) {
+export function toggleFavouriteAction(cityId) {
   return async (dispatch, getState) => {
     try {
       const state = getState();
       const listPageCitiesData = cityListSelector(state);
-      const updatedCityData = listPageCitiesData.map((cityData) => {
-        return cityData.name === name && cityData.country === country
-          ? { ...cityData, isFavourite: !cityData.isFavourite }
-          : cityData;
+      const updatedCityData = listPageCitiesData.map((city) => {
+        return city.id === cityId
+          ? { ...city, isFavourite: !city.isFavourite }
+          : city;
       });
       dispatch(setCityListDataAction(updatedCityData));
-      cityWeatherService.toggleFavourite({ name, country });
+      cityWeatherService.toggleFavourite(cityId);
     } catch (e) {
       console.error(e);
     }
   };
 }
 
-export function removeCityAction({ name, country }) {
+export function removeCityAction(cityId) {
   return async (dispatch, getState) => {
     try {
-      cityWeatherService.removeCity({ name, country });
+      cityWeatherService.removeCity(cityId);
       const state = getState();
       const listPageCitiesData = cityListSelector(state);
       const updatedCityData = listPageCitiesData.filter(
-        (cityData) => !(cityData.name === name && cityData.country === country)
+        (city) => city.id !== cityId
       );
       dispatch(setCityListDataAction(updatedCityData));
     } catch (e) {

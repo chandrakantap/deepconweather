@@ -28,12 +28,7 @@ function UserNoteList() {
   return (
     <div>
       {userNotes.map((note) => (
-        <SingleUserNote
-          note={note}
-          key={note.uniqueKey}
-          name={city.name}
-          country={city.country}
-        />
+        <SingleUserNote note={note} key={note.uniqueKey} city={city} />
       ))}
     </div>
   );

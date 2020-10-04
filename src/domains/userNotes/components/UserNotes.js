@@ -1,26 +1,27 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   loadUserNotesAction,
   clearStateAction,
 } from "domains/userNotes/store/userNotesActions";
+import { cityWeatherDetailsSelector } from "domains/weatherdetail/store/cityWeatherDetailPageSelectors";
 import AddUserNote from "./AddUserNote";
 import UserNoteList from "./UserNoteList";
 
-function UserNotes(props) {
-  const { cityName, country } = props;
+function UserNotes() {
+  const city = useSelector(cityWeatherDetailsSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadUserNotesAction({ name: cityName, country }));
+    dispatch(loadUserNotesAction(city.id));
     return () => {
       dispatch(clearStateAction());
     };
-  }, [dispatch, cityName, country]);
+  }, [dispatch, city]);
 
   return (
     <div>
-      <AddUserNote cityName={cityName} country={country} />
+      <AddUserNote city={city} />
       <UserNoteList />
     </div>
   );

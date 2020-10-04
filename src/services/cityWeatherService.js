@@ -8,7 +8,11 @@ function getCityList() {
   let listPageCities;
 
   if (!listPageCitiesString) {
-    listPageCities = topCitiesByPopulation.slice(0, 1);
+    listPageCities = topCitiesByPopulation.slice(0, 1).map((city) => ({
+      ...city,
+      isFavourite: false,
+      id: `${city.name}_${city.region}_${city.country}`.toLocaleUpperCase(),
+    }));
     localStorage.setItem(LIST_PAGE_CITIES_SK, JSON.stringify(listPageCities));
   } else {
     listPageCities = JSON.parse(listPageCitiesString);
@@ -16,56 +20,47 @@ function getCityList() {
   return listPageCities;
 }
 
-async function getCityDetail(city) {
-  const { name, country, current } = await getCityWeather(city.name);
-  return { name, country, current, isFavourite: city.isFavourite };
+async function getCityWeatherDetail(city) {
+  const query = `${city.name},${city.region},${city.country}`;
+  const { current } = await getCityWeather(query);
+  return { ...city, current };
 }
 
 async function getListPageCitiesData() {
   const listPageCities = getCityList();
-  return await Promise.all(listPageCities.map((city) => getCityDetail(city)));
+  return await Promise.all(
+    listPageCities.map((city) => getCityWeatherDetail(city))
+  );
 }
 
-function toggleFavourite({ name, country }) {
+function toggleFavourite(cityId) {
   const listPageCities = getCityList();
-  const cityNameCountry = `${name},${country}`;
-  const updatedCityData = listPageCities.map((cityData) => {
-    return cityData.name === cityNameCountry
-      ? { ...cityData, isFavourite: !cityData.isFavourite }
-      : cityData;
+  const updatedCityData = listPageCities.map((city) => {
+    return city.id === cityId
+      ? { ...city, isFavourite: !city.isFavourite }
+      : city;
   });
   localStorage.setItem(LIST_PAGE_CITIES_SK, JSON.stringify(updatedCityData));
 }
 
-function removeCity({ name, country }) {
+function removeCity(cityId) {
   const listPageCities = getCityList();
-  const cityNameCountry = `${name},${country}`.toLocaleLowerCase();
-  const updatedCityData = listPageCities.filter(
-    (cityData) => cityData.name.toLocaleLowerCase() !== cityNameCountry
-  );
+  const updatedCityData = listPageCities.filter((city) => city.id !== cityId);
   localStorage.setItem(LIST_PAGE_CITIES_SK, JSON.stringify(updatedCityData));
-  userNoteService.removeUserNoteForCity({ name, country });
+  userNoteService.removeUserNoteForCity(cityId);
 }
 
-function addCity({ name, country, isFavourite = false }) {
+function addCity(newCity) {
   const listPageCities = getCityList();
-  const cityNameCountry = `${name},${country}`;
-
-  const existing = listPageCities.find(
-    (cityData) =>
-      cityData.name.toLocaleLowerCase() === cityNameCountry.toLocaleLowerCase()
-  );
+  const existing = listPageCities.find((city) => city.id === newCity.id);
   if (!existing) {
-    const updatedCityData = [
-      ...listPageCities,
-      { name: cityNameCountry, isFavourite },
-    ];
+    const updatedCityData = [...listPageCities, newCity];
     localStorage.setItem(LIST_PAGE_CITIES_SK, JSON.stringify(updatedCityData));
   }
 }
 
 export default {
-  getCityDetail,
+  getCityWeatherDetail,
   getListPageCitiesData,
   toggleFavourite,
   addCity,

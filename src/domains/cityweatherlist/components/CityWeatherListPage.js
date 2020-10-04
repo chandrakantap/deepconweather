@@ -35,12 +35,12 @@ function CityWeatherListPage() {
   }, [dispatch]);
 
   const onClickFavourite = (city) => {
-    dispatch(toggleFavouriteAction(city));
+    dispatch(toggleFavouriteAction(city.id));
   };
   const onClickRemove = (city) => {
-    dispatch(removeCityAction(city));
+    dispatch(removeCityAction(city.id));
   };
-  const onSelectCity = (city) => {
+  const addNewCityToList = (city) => {
     dispatch(addCityToListAction(city));
   };
 
@@ -59,12 +59,12 @@ function CityWeatherListPage() {
       </header>
       <main className={styles.cityList}>
         <div className={styles.citySearchContainer}>
-          <CitySearch onSelect={onSelectCity} />
+          <CitySearch onSelect={addNewCityToList} />
         </div>
         {cityList.map((city) => (
           <Link
-            to={`/detail/${city.name}/${city.country}`}
-            key={city.name + city.country}
+            to={`/detail?cityId=${city.id}&cityName=${city.name}&region=${city.region}&country=${city.country}`}
+            key={city.id}
           >
             <SingleCityInfo
               city={city}

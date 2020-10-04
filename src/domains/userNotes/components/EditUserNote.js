@@ -7,13 +7,14 @@ import {
 import NoteEditor from "./NoteEditor";
 
 function EditUserNote(props) {
-  const { name, country, note, onEditDone } = props;
+  const { city, note, onEditDone } = props;
   const [updatednote, setNote] = useState(props.note.text || "");
   const dispatch = useDispatch();
 
   const onChangeNote = (e) => {
     setNote(e.target.value);
   };
+
   const editUserNote = () => {
     if (updatednote.trim().length > 0) {
       const now = new Date();
@@ -22,18 +23,10 @@ function EditUserNote(props) {
         text: updatednote,
         lastUpdatedOn: now.toLocaleString(),
       };
-      dispatch(
-        editUserNoteAction({
-          note: noteObject,
-          name,
-          country,
-        })
-      );
+      dispatch(editUserNoteAction(city.id, noteObject));
       setNote("");
     } else {
-      dispatch(
-        removeUserNoteAction({ name, country, uniqueKey: note.uniqueKey })
-      );
+      dispatch(removeUserNoteAction(city.id, note.uniqueKey));
     }
     onEditDone();
   };

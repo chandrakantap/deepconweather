@@ -1,6 +1,5 @@
-function getUserNotes({ name, country }) {
-  const cityNameCountry = `${name}_${country}`.toLocaleUpperCase();
-  const userNotesStr = localStorage.getItem(cityNameCountry);
+function getUserNotes(cityId) {
+  const userNotesStr = localStorage.getItem(cityId);
   if (userNotesStr) {
     return JSON.parse(userNotesStr);
   } else {
@@ -8,38 +7,31 @@ function getUserNotes({ name, country }) {
   }
 }
 
-function addUserNote({ name, country, note }) {
-  const cityNameCountry = `${name}_${country}`.toLocaleUpperCase();
-  const userNotesStr = localStorage.getItem(cityNameCountry);
-  const userNotes = userNotesStr ? JSON.parse(userNotesStr) : [];
+function addUserNote({ cityId, note }) {
+  const userNotes = getUserNotes(cityId);
 
   userNotes.push(note);
-  localStorage.setItem(cityNameCountry, JSON.stringify(userNotes));
+  localStorage.setItem(cityId, JSON.stringify(userNotes));
 }
-function editUserNote({ name, country, note }) {
-  const cityNameCountry = `${name}_${country}`.toLocaleUpperCase();
-  const userNotesStr = localStorage.getItem(cityNameCountry);
-  const userNotes = userNotesStr ? JSON.parse(userNotesStr) : [];
+function editUserNote({ cityId, note }) {
+  const userNotes = getUserNotes(cityId);
 
   const updatedUserNotes = userNotes.map((item) =>
     item.uniqueKey === note.uniqueKey ? note : item
   );
-  localStorage.setItem(cityNameCountry, JSON.stringify(updatedUserNotes));
+  localStorage.setItem(cityId, JSON.stringify(updatedUserNotes));
 }
-function removeUserNote({ name, country, uniqueKey }) {
-  const cityNameCountry = `${name}_${country}`.toLocaleUpperCase();
-  const userNotesStr = localStorage.getItem(cityNameCountry);
-  const userNotes = userNotesStr ? JSON.parse(userNotesStr) : [];
+function removeUserNote({ cityId, uniqueKey }) {
+  const userNotes = getUserNotes(cityId);
 
   const updatedUserNotes = userNotes.filter(
     (note) => note.uniqueKey !== uniqueKey
   );
-  localStorage.setItem(cityNameCountry, JSON.stringify(updatedUserNotes));
+  localStorage.setItem(cityId, JSON.stringify(updatedUserNotes));
 }
 
-function removeUserNoteForCity({ name, country }) {
-  const cityNameCountry = `${name}_${country}`.toLocaleUpperCase();
-  localStorage.removeItem(cityNameCountry);
+function removeUserNoteForCity(cityId) {
+  localStorage.removeItem(cityId);
 }
 
 export default {

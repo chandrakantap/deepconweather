@@ -22,7 +22,7 @@ function CitySearch({ onSelect }) {
         results.push({
           name: "No results found",
           country: "",
-          uniqueKey: "NO_RES",
+          id: "NO_RES",
         });
       }
       setResults(results);
@@ -30,13 +30,13 @@ function CitySearch({ onSelect }) {
     }
   };
   const onSelectCity = (event) => {
-    const uniqueKey = event.currentTarget.name;
-    if (uniqueKey === "NO_RES") {
+    const id = event.currentTarget.name;
+    if (id === "NO_RES") {
       return;
     }
     const updatedResults = results.map((city) => {
-      if (city.uniqueKey === uniqueKey) {
-        onSelect({ name: city.name, country: city.country });
+      if (city.id === id) {
+        onSelect(city);
         return { ...city, added: true };
       }
       return city;
@@ -53,12 +53,14 @@ function CitySearch({ onSelect }) {
           {results.map((city) => (
             <button
               className={styles.searchItem}
-              key={city.uniqueKey}
-              name={city.uniqueKey}
+              key={city.id}
+              name={city.id}
               onClick={onSelectCity}
             >
               <span>
-                {city.name}, {city.country}
+                {city.region
+                  ? `${city.name}, ${city.region}, ${city.country}`
+                  : `${city.name}, ${city.country}`}
               </span>
               {city.added && (
                 <span>
