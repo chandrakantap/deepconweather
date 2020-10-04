@@ -52,9 +52,13 @@ function removeCity(cityId) {
 
 function addCity(newCity) {
   const listPageCities = getCityList();
-  const existing = listPageCities.find((city) => city.id === newCity.id);
+  const cityToAdd = { ...newCity };
+  if (!cityToAdd.id || cityToAdd.id === "undefined") {
+    cityToAdd.id = `${newCity.name}_${newCity.region}_${newCity.country}`.toLocaleUpperCase();
+  }
+  const existing = listPageCities.find((city) => city.id === cityToAdd.id);
   if (!existing) {
-    const updatedCityData = [...listPageCities, newCity];
+    const updatedCityData = [...listPageCities, cityToAdd];
     localStorage.setItem(LIST_PAGE_CITIES_SK, JSON.stringify(updatedCityData));
   }
 }

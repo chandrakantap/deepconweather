@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Throbber from "common/ui/Throbber";
 import { getCityWeather } from "services/weatherStackApi";
+import { setCityWeatherDetailsAction } from "domains/weatherdetail/store/cityWeatherDetailPageActions";
 import styles from "./GeoLocation.module.css";
 
 class GeoLocationAwareRedirector extends Component {
@@ -12,7 +14,8 @@ class GeoLocationAwareRedirector extends Component {
     const { history } = this.props;
     this.setState({ gotPositionResponse: true });
     const query = `${position.coords.latitude},${position.coords.longitude}`;
-    const { location: city } = await getCityWeather(query);
+    const city = await getCityWeather(query);
+    this.props.dispatch(setCityWeatherDetailsAction(city));
     history.push(
       `/detail?cityId=${city.id}&cityName=${city.name}&region=${city.region}&country=${city.country}`
     );
@@ -66,4 +69,4 @@ class GeoLocationAwareRedirector extends Component {
   }
 }
 
-export default GeoLocationAwareRedirector;
+export default connect()(GeoLocationAwareRedirector);

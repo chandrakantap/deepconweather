@@ -1,5 +1,6 @@
 import { ACTION_TYPES } from "./cityWeatherDetailPageReducer";
 import { cityListSelector } from "domains/cityweatherlist/store/cityWeatherListPageSelectors";
+import { cityWeatherDetailsSelector } from "./cityWeatherDetailPageSelectors";
 import cityWeatherService from "services/cityWeatherService";
 
 export function loadCityWeatherDetailAction({
@@ -11,6 +12,12 @@ export function loadCityWeatherDetailAction({
   return async (dispatch, getState) => {
     try {
       const state = getState();
+      const currentLoaded = cityWeatherDetailsSelector(state);
+      if (currentLoaded.id === cityId) {
+        return;
+      }
+      dispatch(clearStateAction());
+
       const cityList = cityListSelector(state);
       const cityWeatherDetails = cityList.find((city) => city.id === cityId);
       if (cityWeatherDetails) {

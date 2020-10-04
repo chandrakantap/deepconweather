@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdHome } from "react-icons/md";
 import IconButton from "common/ui/IconButton";
 import Throbber from "common/ui/Throbber";
-import {
-  loadCityWeatherDetailAction,
-  clearStateAction,
-} from "domains/weatherdetail/store/cityWeatherDetailPageActions";
+import { loadCityWeatherDetailAction } from "domains/weatherdetail/store/cityWeatherDetailPageActions";
 import CityTemperatureDetail from "./CityTemperatureDetail";
 import WeatherAttributes from "./WeatherAttributes";
 import UserNotes from "domains/userNotes/components/UserNotes";
@@ -25,9 +22,6 @@ function CityWeatherDetailPage(props) {
     dispatch(
       loadCityWeatherDetailAction({ cityId, cityName, region, country })
     );
-    return () => {
-      dispatch(clearStateAction());
-    };
   }, [dispatch, props.location.search]);
 
   const onClickBack = () => {
