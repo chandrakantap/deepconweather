@@ -2,7 +2,7 @@ This app allows users to look up current weather information for cities around t
 
 By default weather details of current city is shown if user grant geo-location permission.
 
-### Please visit [orange-berry.surge.sh](https://orange-berry.surge.sh){:target="_blank"} for live demo.
+### Please visit <a href="https://orange-berry.surge.sh" target="__blank">orange-berry.surge.sh</a> for live demo.
 
 # Table of Contents
 1. [Location prompt](#Location-prompt)
