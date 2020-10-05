@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CityWeatherDetailPage should renders properly when loading 1`] = `
+<div>
+  <section
+    class="detailPageRoot"
+  >
+    <div
+      class="throbber"
+    >
+      <div
+        class="throbberMask"
+      />
+      <div
+        class="loaderContainer"
+      >
+        <div
+          class="loader"
+        />
+      </div>
+    </div>
+  </section>
+</div>
+`;

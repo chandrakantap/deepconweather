@@ -26,12 +26,6 @@ export default function (state = initialState, action) {
         data: action.data,
       };
     }
-    case ACTION_TYPES.SET_IS_LOADED: {
-      return {
-        ...state,
-        isLoaded: action.data.isLoaded,
-      };
-    }
     case ACTION_TYPES.SET_ERROR: {
       return {
         ...state,
