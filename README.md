@@ -8,7 +8,7 @@ By default weather details of current city is shown if user grant geo-location p
 1. [Location prompt](#Location-prompt)
 2. [List page](#List-page)
     1. [Delete city from list](#Delete-city-from-list)
-    2. [Set as favourite](#Set-as-favourite-❤️)
+    2. [Set as favourite](#Set-as-favourite)
     3. [City Search](#City-Search)
 3. [Detail Page](#Detail-Page)
     1. [Add user note](#Add-user-note)
@@ -40,8 +40,8 @@ User can remove the cities from default list by clicking the top-right cross ico
 ![DeleteCity](/doc/images/DeleteCity.png)
 
 
-### Set as favourite ❤️
-Cities can be marked as favourite which will be prioritized by placing those at the top of the list on subsequent visit to the list page.
+### Set as favourite
+Cities can be marked as favourite ❤️ which will be prioritized by placing those at the top of the list on subsequent visit to the list page.
 Mouse click on he heart icon on the right against each city item will toggle the city as favourite and not-favourite.
 
 Refer the screenshot above 👆
