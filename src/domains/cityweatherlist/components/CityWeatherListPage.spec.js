@@ -62,8 +62,8 @@ describe("CityWeatherListPage", () => {
     window.localStorage.setItem(
       "LIST_PAGE_CITIES_SK",
       '[\
-        {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN"},\
-        {"id":"KAGLIPUR_KARNATAKA_INDIA","name":"Kaglipur","region":"Karnataka","country":"India"}\
+        {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN","current":{}},\
+        {"id":"KAGLIPUR_KARNATAKA_INDIA","name":"Kaglipur","region":"Karnataka","country":"India","current":{}}\
        ]'
     );
     const { container } = render(<CityWeatherListPage />);
@@ -77,8 +77,8 @@ describe("CityWeatherListPage", () => {
     window.localStorage.setItem(
       "LIST_PAGE_CITIES_SK",
       '[\
-        {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN"},\
-        {"id":"KAGLIPUR_KARNATAKA_INDIA","name":"Kaglipur","region":"Karnataka","country":"India"}\
+        {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN","current":{}},\
+        {"id":"KAGLIPUR_KARNATAKA_INDIA","name":"Kaglipur","region":"Karnataka","country":"India","current":{}}\
        ]'
     );
     const { container } = render(<CityWeatherListPage />);
@@ -93,7 +93,7 @@ describe("CityWeatherListPage", () => {
     window.localStorage.setItem(
       "LIST_PAGE_CITIES_SK",
       '[\
-          {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN"}\
+          {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN","current":{}}\
       ]'
     );
     const { container } = render(<CityWeatherListPage />);
@@ -105,7 +105,7 @@ describe("CityWeatherListPage", () => {
     window.localStorage.setItem(
       "LIST_PAGE_CITIES_SK",
       '[\
-          {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN"}\
+          {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN","current":{}}\
       ]'
     );
     jest.spyOn(weatherStackApi, "locationLookup").mockResolvedValueOnce([

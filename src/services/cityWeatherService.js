@@ -11,6 +11,7 @@ function getCityList() {
     listPageCities = topCitiesByPopulation.slice(0, 15).map((city) => ({
       ...city,
       isFavourite: false,
+      current: {},
       id: `${city.name}_${city.region}_${city.country}`.toLocaleUpperCase(),
     }));
     localStorage.setItem(LIST_PAGE_CITIES_SK, JSON.stringify(listPageCities));
@@ -64,6 +65,7 @@ function addCity(newCity) {
 }
 
 export default {
+  getCityList,
   getCityWeatherDetail,
   getListPageCitiesData,
   toggleFavourite,

@@ -19,15 +19,19 @@ export function loadCityListAction() {
       const state = getState();
       const isDataLoaded = isCityListLoadedSelector(state);
 
-      let listPageCitiesData;
       if (isDataLoaded) {
-        listPageCitiesData = [...cityListSelector(state)];
+        const listPageCitiesData = [...cityListSelector(state)];
+        dispatch(
+          setCityListDataAction(listPageCitiesData.sort(cityDataSortFunction))
+        );
       } else {
-        listPageCitiesData = await cityWeatherService.getListPageCitiesData();
+        const cityList = cityWeatherService.getCityList();
+        dispatch(setCityListDataAction(cityList.sort(cityDataSortFunction)));
+        const cityListWithWeather = await cityWeatherService.getListPageCitiesData();
+        dispatch(
+          setCityListDataAction(cityListWithWeather.sort(cityDataSortFunction))
+        );
       }
-      dispatch(
-        setCityListDataAction(listPageCitiesData.sort(cityDataSortFunction))
-      );
     } catch (e) {
       console.error(e);
       dispatch(setCityListLoadErrorAction("Unable to load listPageCitiesData"));
