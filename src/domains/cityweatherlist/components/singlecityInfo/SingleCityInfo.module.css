@@ -49,6 +49,11 @@
 .root:hover .deleteIcon {
   display: block;
 }
+@media (max-width: 800px) {
+  .deleteIcon {
+    display: block;
+  }
+}
 @media (max-width: 580px) {
   .root {
     grid-template-columns: 1fr 90px 50px;
