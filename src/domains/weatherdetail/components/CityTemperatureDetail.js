@@ -13,7 +13,7 @@ function CityTemperatureDetail() {
           {city.region ? `${city.region}, ${city.country}` : city.country}
         </h3>
       </div>
-      <div>
+      <div className={styles.temperatureBlock}>
         <p className={styles.temperature}>{city.current.temperature} &#8451;</p>
         <p>{city.current.weather_descriptions[0]}</p>
       </div>

@@ -13,6 +13,34 @@
   width: 900px;
 }
 .citySearchContainer {
-  padding: 1rem 0rem;
+  padding: 1rem 3rem;
   margin-bottom: 2rem;
+}
+@media (max-width: 915px) {
+  .header {
+    position: unset;
+    padding: 1rem 3rem;
+  }
+  .cityList {
+    width: 100%;
+  }
+  .citySearchContainer {
+    padding: 1rem 3rem;
+    margin-bottom: 2rem;
+  }
+}
+@media (max-width: 640px) {
+  .header {
+    position: unset;
+    padding: 1rem;
+  }
+  .citySearchContainer {
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+}
+@media (max-width: 580px) {
+  .header h1 {
+    font-size: 1.7rem;
+  }
 }

@@ -1,20 +1,35 @@
-.detailPageRoot{
-    position: relative;
-    height: calc(100vh);
-    overflow: auto;
-    background: #2980b9;
-    background: -webkit-linear-gradient(to right, #2c3e50, #2980b9);
-    background: linear-gradient(to right, #2c3e50, #2980b9);
-    color: #fff;
+.detailPageRoot {
+  position: relative;
+  height: calc(100vh);
+  overflow: auto;
+  background: #2980b9;
+  background: -webkit-linear-gradient(to right, #2c3e50, #2980b9);
+  background: linear-gradient(to right, #2c3e50, #2980b9);
+  color: #fff;
 }
-.backButton{
-    margin: 2rem ;
-    color: #fff;
-    font-size: 1.5rem;
+.backButton {
+  margin: 2rem;
+  color: #fff;
+  font-size: 1.5rem;
 }
-.lowerSection{
-    display: grid;
-    grid-template-columns:1fr 0.4fr 1fr;
-    align-items: start;
-    margin: 3rem 6rem;
+.lowerSection {
+  display: grid;
+  grid-template-columns: 1fr 0.4fr 1fr;
+  align-items: start;
+  margin: 3rem 6rem;
+}
+@media (max-width: 1056px) {
+  .lowerSection {
+    margin: 3rem;
+    grid-template-columns: 1fr 0.2fr 1fr;
+  }
+}
+@media (max-width: 900px) {
+  .lowerSection {
+    display: block;
+    margin: 3rem 1rem;
+  }
+  .backButton {
+    margin: 1rem;
+  }
 }

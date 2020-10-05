@@ -39,6 +39,12 @@ class SearchInput extends Component {
     this.setState({ searchQuery: "" });
     this.props.onChange("");
   };
+  onKeyDown = (event) => {
+    if (event.key === "Escape") {
+      this.clearSearch();
+      event.currentTarget.blur();
+    }
+  };
   render() {
     const { searchQuery } = this.state;
 
@@ -52,6 +58,7 @@ class SearchInput extends Component {
           })}
           value={searchQuery}
           onChange={this.onChangeInput}
+          onKeyDown={this.onKeyDown}
           placeholder="Search for cities..."
         />
         {searchQuery && (

@@ -17,7 +17,7 @@ function CityWeatherDetailPage(props) {
 
   useEffect(() => {
     const { cityId, cityName, region, country } = getQueryParams(
-      props.location.search
+      decodeURI(props.location.search)
     );
     dispatch(
       loadCityWeatherDetailAction({ cityId, cityName, region, country })

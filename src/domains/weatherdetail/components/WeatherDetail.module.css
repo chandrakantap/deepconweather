@@ -3,6 +3,7 @@
   grid-template-columns: 1fr auto;
   padding: 0 6rem;
   font-size: 1.5rem;
+  grid-gap: 1rem;
 }
 .temperature {
   font-size: 6rem;
@@ -35,4 +36,43 @@
 }
 .waTile h3 {
   font-size: 2rem;
+}
+@media (max-width: 1056px) {
+  .mainDetails {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 0 3rem;
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 900px) {
+  .waRoot {
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .waTile {
+    width: auto;
+  }
+}
+
+@media (max-width: 645px) {
+  .waRoot {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cityName h1 {
+    font-size: 2rem;
+  }
+  .cityName h3 {
+    font-size: 1rem;
+  }
+  .temperature {
+    font-size: 4rem;
+  }
+  .mainDetails {
+    display: block;
+    padding: 0 1rem;
+  }
+  .temperatureBlock {
+    text-align: right;
+  }
 }

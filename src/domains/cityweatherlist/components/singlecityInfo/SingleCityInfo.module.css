@@ -1,17 +1,22 @@
 .root {
   display: grid;
+  grid-gap: 5px;
   grid-template-columns: 1fr 150px 80px;
   align-items: center;
   justify-content: center;
   box-shadow: rgba(20, 20, 20, 0.08) 50px 50px 100px 0px;
   width: 100%;
-  height: 150px;
   margin-bottom: 1rem;
   padding: 1rem 3rem;
   cursor: pointer;
   position: relative;
   color: #fff;
   opacity: 0.8;
+}
+@media (max-width: 640px) {
+  .root {
+    padding: 0.6rem 1rem;
+  }
 }
 .root:hover {
   background-color: #bc6b83;
@@ -27,7 +32,6 @@
   font-size: 1.2rem;
   font-weight: 400;
 }
-
 .temperature {
   font-size: 3rem;
   font-weight: 300;
@@ -44,4 +48,25 @@
 }
 .root:hover .deleteIcon {
   display: block;
+}
+@media (max-width: 580px) {
+  .root {
+    grid-template-columns: 1fr 90px 50px;
+  }
+  .cityName {
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+  .countryName {
+    font-size: 0.8rem;
+  }
+  .temperature {
+    font-size: 1.5rem;
+  }
+  .favouriteIcon {
+    font-size: 1.5rem;
+  }
+  .deleteIcon {
+    font-size: 1rem;
+  }
 }
