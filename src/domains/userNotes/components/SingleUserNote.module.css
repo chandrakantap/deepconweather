@@ -24,6 +24,12 @@
   font-size: 0.7rem;
   margin-top: 5px;
 }
+@media (max-width: 800px) {
+  .actionControls {
+    display: grid;
+    font-size: 1.5rem;
+  }
+}
 @media (max-width: 645px) {
   .noteBody {
     padding: 1rem;
