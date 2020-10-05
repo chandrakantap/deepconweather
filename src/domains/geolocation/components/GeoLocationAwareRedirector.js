@@ -33,11 +33,16 @@ class GeoLocationAwareRedirector extends Component {
   };
   findGeoLocation = async () => {
     if (navigator.geolocation) {
-      const permissionStatus = await navigator.permissions.query({
-        name: "geolocation",
-      });
-      this.onChangePermissionState(permissionStatus.state);
-      permissionStatus.addEventListener("change", this.onChangePermissionState);
+      if (navigator.permissions) {
+        const permissionStatus = await navigator.permissions.query({
+          name: "geolocation",
+        });
+        this.onChangePermissionState(permissionStatus.state);
+        permissionStatus.addEventListener(
+          "change",
+          this.onChangePermissionState
+        );
+      }
       navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError);
     } else {
       this.geoError();

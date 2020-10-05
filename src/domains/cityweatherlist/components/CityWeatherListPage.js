@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
-import { Link } from "react-router-dom";
 import Throbber from "common/ui/Throbber";
 import SingleCityInfo from "domains/cityweatherlist/components/singlecityInfo/SingleCityInfo";
 import CitySearch from "domains/citysearch/components/CitySearch";
@@ -62,16 +61,12 @@ function CityWeatherListPage() {
           <CitySearch onSelect={addNewCityToList} />
         </div>
         {cityList.map((city) => (
-          <Link
-            to={`/detail?cityId=${city.id}&cityName=${city.name}&region=${city.region}&country=${city.country}`}
+          <SingleCityInfo
             key={city.id}
-          >
-            <SingleCityInfo
-              city={city}
-              onClickFavourite={onClickFavourite}
-              onClickRemove={onClickRemove}
-            />
-          </Link>
+            city={city}
+            onClickFavourite={onClickFavourite}
+            onClickRemove={onClickRemove}
+          />
         ))}
       </main>
     </section>
