@@ -37,7 +37,7 @@ function CitySearch({ onSelect }) {
     const updatedResults = results.map((city) => {
       if (city.id === id) {
         onSelect(city);
-        return { ...city, added: true };
+        return { ...city, current: {}, added: true };
       }
       return city;
     });

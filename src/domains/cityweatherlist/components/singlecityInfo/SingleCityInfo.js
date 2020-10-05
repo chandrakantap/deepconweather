@@ -33,7 +33,7 @@ function SingleCityInfo({ city, onClickFavourite, onClickRemove }) {
         </div>
       </Link>
       <h2 className={styles.temperature}>
-        {city.current.temperature || "-"} &#8451;
+        {(city.current && city.current.temperature) || "-"} &#8451;
       </h2>
       <div onClick={stopPropagation}>
         <IconButton
