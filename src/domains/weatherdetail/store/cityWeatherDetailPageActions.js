@@ -51,10 +51,8 @@ export function toggleFavouriteAction() {
 
     const state = getState();
     const city = cityWeatherDetailsSelector(state);
-    if (city.isFavourite) {
-      cityWeatherService.addCity(city);
-      dispatch(addCityToListAction(city));
-    }
+    cityWeatherService.addCity(city);
+    dispatch(addCityToListAction(city));
   };
 }
 

@@ -9,7 +9,9 @@ export async function getCityWeather(query) {
     current,
     location: { name, region, country },
   } = await response.json();
-  const id = `${name}_${region}_${country}`.toLocaleUpperCase();
+  const id = `${name}_${region}_${country}`
+    .toLocaleUpperCase()
+    .replace(/[ ]*/g, "");
   return { id, name, region, country, current };
 }
 
@@ -18,10 +20,22 @@ export async function locationLookup(query) {
     `${apiBaseURL}/autocomplete?access_key=${accessKey}&query=${query}`
   );
   const { results = [] } = await response.json();
-  return results.map(({ name, region, country }) => ({
-    name,
-    region,
-    country,
-    id: `${name}_${region}_${country}`.toLocaleUpperCase(),
-  }));
+  const uniqueResults = [];
+  const uniqueIds = {};
+
+  results.forEach(({ name, region, country }) => {
+    const city = {
+      name,
+      region,
+      country,
+      id: `${name}_${region}_${country}`
+        .toLocaleUpperCase()
+        .replace(/[ ]*/g, ""),
+    };
+    if (!uniqueIds[city.id]) {
+      uniqueResults.push(city);
+      uniqueIds[city.id] = true;
+    }
+  });
+  return uniqueResults;
 }

@@ -2,7 +2,8 @@ import { getCityWeather } from "./weatherStackApi";
 import userNoteService from "./userNoteService";
 import topCitiesByPopulation from "./topCitiesByPopulation";
 
-const LIST_PAGE_CITIES_SK = "LIST_PAGE_CITIES_SK";
+export const LIST_PAGE_CITIES_SK = "SK_LIST_PAGE_CITIES";
+
 function getCityList() {
   const listPageCitiesString = localStorage.getItem(LIST_PAGE_CITIES_SK);
   let listPageCities;
@@ -12,7 +13,9 @@ function getCityList() {
       ...city,
       isFavourite: false,
       current: {},
-      id: `${city.name}_${city.region}_${city.country}`.toLocaleUpperCase(),
+      id: `${city.name}_${city.region}_${city.country}`
+        .toLocaleUpperCase()
+        .replace(/[ ]*/g, ""),
     }));
     localStorage.setItem(LIST_PAGE_CITIES_SK, JSON.stringify(listPageCities));
   } else {

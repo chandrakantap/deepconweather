@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MdHome } from "react-icons/md";
+import { createSelector } from "reselect";
+import { MdHome, MdArrowBack } from "react-icons/md";
 import IconButton from "common/ui/IconButton";
 import Throbber from "common/ui/Throbber";
 import {
@@ -11,12 +12,19 @@ import CityTemperatureDetail from "./CityTemperatureDetail";
 import WeatherAttributes from "./WeatherAttributes";
 import UserNotes from "domains/userNotes/components/UserNotes";
 import { isDetailsLoadedSelector } from "domains/weatherdetail/store/cityWeatherDetailPageSelectors";
+import { isCityListLoadedSelector } from "domains/cityweatherlist/store/cityWeatherListPageSelectors";
 import { getQueryParams } from "common/urlUtils";
 import styles from "./CityWeatherDetailPage.module.css";
 
+const combinedSelecttor = createSelector(
+  isDetailsLoadedSelector,
+  isCityListLoadedSelector,
+  (isLoaded, isListPageLoaded) => ({ isLoaded, isListPageLoaded })
+);
+
 function CityWeatherDetailPage(props) {
   const dispatch = useDispatch();
-  const isLoaded = useSelector(isDetailsLoadedSelector);
+  const { isLoaded, isListPageLoaded } = useSelector(combinedSelecttor);
 
   useEffect(() => {
     const { cityId, cityName, region, country } = getQueryParams(
@@ -29,6 +37,9 @@ function CityWeatherDetailPage(props) {
   }, [dispatch, props.location.search]);
 
   const onClickBack = () => {
+    if (isListPageLoaded) {
+      props.history.goBack();
+    }
     props.history.push("/list");
   };
   if (!isLoaded) {
@@ -42,7 +53,16 @@ function CityWeatherDetailPage(props) {
     <section className={styles.detailPageRoot}>
       <div className={styles.backButton}>
         <IconButton onClick={onClickBack}>
-          <MdHome /> &nbsp;&nbsp;Home
+          {isListPageLoaded ? (
+            <>
+              <MdArrowBack />
+              &nbsp;&nbsp; Back
+            </>
+          ) : (
+            <>
+              <MdHome /> &nbsp;&nbsp;Home
+            </>
+          )}
         </IconButton>
       </div>
       <CityTemperatureDetail />

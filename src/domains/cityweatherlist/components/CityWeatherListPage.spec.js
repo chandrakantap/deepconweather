@@ -8,6 +8,7 @@ import {
 import { render } from "common/test-utils";
 import CityWeatherListPage from "./CityWeatherListPage";
 import * as weatherStackApi from "services/weatherStackApi";
+import { LIST_PAGE_CITIES_SK } from "services/cityWeatherService";
 
 const getCityWeatherMockFn = (cityName) => {
   const cityData = cityName.split("_");
@@ -62,7 +63,7 @@ describe("CityWeatherListPage", () => {
 
   test("should display cities from localStorage if present default", async () => {
     window.localStorage.setItem(
-      "LIST_PAGE_CITIES_SK",
+      LIST_PAGE_CITIES_SK,
       '[\
         {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN","current":{}},\
         {"id":"KAGLIPUR_KARNATAKA_INDIA","name":"Kaglipur","region":"Karnataka","country":"India","current":{}}\
@@ -77,7 +78,7 @@ describe("CityWeatherListPage", () => {
 
   test("should delete cities on click delete icon", async () => {
     window.localStorage.setItem(
-      "LIST_PAGE_CITIES_SK",
+      LIST_PAGE_CITIES_SK,
       '[\
         {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN","current":{}},\
         {"id":"KAGLIPUR_KARNATAKA_INDIA","name":"Kaglipur","region":"Karnataka","country":"India","current":{}}\
@@ -93,7 +94,7 @@ describe("CityWeatherListPage", () => {
 
   test("should set favourite on click favourite icon", async () => {
     window.localStorage.setItem(
-      "LIST_PAGE_CITIES_SK",
+      LIST_PAGE_CITIES_SK,
       '[\
           {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN","current":{}}\
       ]'
@@ -105,7 +106,7 @@ describe("CityWeatherListPage", () => {
   });
   test("should open details page on click search city item", async () => {
     window.localStorage.setItem(
-      "LIST_PAGE_CITIES_SK",
+      LIST_PAGE_CITIES_SK,
       '[\
           {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN","current":{}}\
       ]'

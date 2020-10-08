@@ -17,10 +17,10 @@ describe("GeoLocationAwareRedirector", () => {
     const navigatorGeo = global.navigator.geolocation;
     global.navigator.geolocation = false;
     const historyMock = {
-      push: jest.fn(),
+      replace: jest.fn(),
     };
     render(<GeoLocationAwareRedirector history={historyMock} />);
-    expect(historyMock.push).toHaveBeenCalledWith("/list");
+    expect(historyMock.replace).toHaveBeenCalledWith("/list");
     global.navigator.geolocation = navigatorGeo;
   });
   test("should prompt for permission", async () => {
@@ -38,7 +38,7 @@ describe("GeoLocationAwareRedirector", () => {
   });
   test("should go to detail page if permission allowed", async () => {
     const historyMock = {
-      push: jest.fn(),
+      replace: jest.fn(),
     };
     const dispatchMock = (fn) => (typeof fn === "function" ? fn() : null);
     global.navigator.permissions.query.mockResolvedValueOnce({
@@ -63,7 +63,7 @@ describe("GeoLocationAwareRedirector", () => {
       />
     );
     await waitForDomChange();
-    expect(historyMock.push).toHaveBeenCalledWith(
+    expect(historyMock.replace).toHaveBeenCalledWith(
       "/detail?cityId=TOKYO_TOKYO_JAPAN&cityName=Tokyo&region=Tokyo&country=Japan"
     );
   });

@@ -1,10 +1,10 @@
-import cityWeatherService from "./cityWeatherService";
+import cityWeatherService, { LIST_PAGE_CITIES_SK } from "./cityWeatherService";
 import * as weatherStackApi from "./weatherStackApi";
 
 describe("cityWeatherService", () => {
   test("should not add city if existing", () => {
     window.localStorage.setItem(
-      "LIST_PAGE_CITIES_SK",
+      LIST_PAGE_CITIES_SK,
       '[\
         {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN"},\
         {"id":"KAGLIPUR_KARNATAKA_INDIA","name":"Kaglipur","region":"Karnataka","country":"India"},\
@@ -19,7 +19,7 @@ describe("cityWeatherService", () => {
     });
 
     const updatedItems = JSON.parse(
-      window.localStorage.getItem("LIST_PAGE_CITIES_SK")
+      window.localStorage.getItem(LIST_PAGE_CITIES_SK)
     );
     expect(updatedItems.length).toBe(3);
   });

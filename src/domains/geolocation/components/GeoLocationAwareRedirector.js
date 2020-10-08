@@ -16,13 +16,13 @@ class GeoLocationAwareRedirector extends Component {
     const query = `${position.coords.latitude},${position.coords.longitude}`;
     const city = await getCityWeather(query);
     this.props.dispatch(setCityWeatherDetailsAction(city));
-    history.push(
+    history.replace(
       `/detail?cityId=${city.id}&cityName=${city.name}&region=${city.region}&country=${city.country}`
     );
   };
   geoError = () => {
     const { history } = this.props;
-    history.push("/list");
+    history.replace("/list");
   };
   onChangePermissionState = (state) => {
     if (state === "prompt") {
@@ -32,7 +32,7 @@ class GeoLocationAwareRedirector extends Component {
     }
   };
   findGeoLocation = async () => {
-    if (navigator.geolocation) {
+    if (navigator.geolocation && navigator.onLine) {
       if (navigator.permissions) {
         const permissionStatus = await navigator.permissions.query({
           name: "geolocation",

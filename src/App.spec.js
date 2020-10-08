@@ -7,13 +7,14 @@ import {
   cleanup,
 } from "@testing-library/react";
 import * as weatherStackApi from "services/weatherStackApi";
+import { LIST_PAGE_CITIES_SK } from "services/cityWeatherService";
 import App from "./App";
 
 describe("index", () => {
   let getCityWeatherSpy;
   beforeAll(() => {
     window.localStorage.setItem(
-      "LIST_PAGE_CITIES_SK",
+      LIST_PAGE_CITIES_SK,
       '[\
               {"name":"Tokyo","country":"Japan","region":"Tokyo","isFavourite":true,"id":"TOKYO_TOKYO_JAPAN","current":{}},\
               {"id":"KAGLIPUR_KARNATAKA_INDIA","name":"Kaglipur","region":"Karnataka","country":"India","current":{}}\
@@ -37,7 +38,7 @@ describe("index", () => {
   afterEach(cleanup);
   afterAll(() => {
     getCityWeatherSpy.restore();
-    window.localStorage.removeItem("LIST_PAGE_CITIES_SK");
+    window.localStorage.removeItem(LIST_PAGE_CITIES_SK);
   });
   test("should renders properly", async () => {
     const navigatorGeo = global.navigator.geolocation;
