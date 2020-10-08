@@ -49,9 +49,10 @@ Refer the screenshot above 👆
 
 
 ### City Search
-Cities can be added to the list by using the search functionalities on top the [List page](#List-page)
+User can search for cities to view weather details for a city which is not present in list.
+Type search query in the search input on top the [List page](#List-page)
 
-Click on the searcj input and type to search for city. Multiple cities can be added in single search.
+On click of the search result item detail page for that city will open.
 
 ![citySearchResult](/doc/images/citySearch.png)
 
@@ -63,13 +64,17 @@ to close the search click on the cross icon on the right of the search input.
 ## Detail Page
 Detail page displays more weather information for a particular city.
 
-![weatherDetilPage](/doc/images/weatherDetilPage.png)
+![weatherDetilPage](/doc/images/cityDetail.png)
+
+City can be added/removed from favourite list using the toggleFavourite icon beside city name. If  set as favourite, city will be added to city list if not there already.
+
+![weatherDetilPage](/doc/images/FavouriteIconInDetailPage.png)
 
 ### Add user note
 To add not type your comment on the textarea at right and click on Add.
 
 Added notes will be displayed at the bottom of the textarea.
-![usernoteDisplay](/doc/images/usernoteDisplay.png)
+![usernoteDisplay](/doc/images/cityDetail.png)
 
 ### Update user note
 User can edit note by clicking on the `Edit` link at the right-bottom of each note which appears on mouse-hover on the note.

@@ -76,3 +76,7 @@
     text-align: right;
   }
 }
+.favouriteIcon {
+  vertical-align: middle;
+  margin-left: 2rem;
+}

@@ -38,22 +38,10 @@ export function loadCityListAction() {
     }
   };
 }
-export function addCityToListAction(newCity) {
-  return async (dispatch, getState) => {
-    try {
-      const state = getState();
-      const cityList = cityListSelector(state);
-      const existingCity = cityList.find((city) => city.id === newCity.id);
-      if (existingCity) {
-        dispatch({ type: ACTION_TYPES.ADD_CITY, data: { existingCity } });
-      } else {
-        cityWeatherService.addCity(newCity);
-        const result = await cityWeatherService.getCityWeatherDetail(newCity);
-        dispatch({ type: ACTION_TYPES.ADD_CITY, data: { city: result } });
-      }
-    } catch (e) {
-      console.error(e);
-    }
+export function addCityToListAction(city) {
+  return {
+    type: ACTION_TYPES.ADD_CITY,
+    data: { city },
   };
 }
 
@@ -87,7 +75,9 @@ export function toggleFavouriteAction(cityId) {
           ? { ...city, isFavourite: !city.isFavourite }
           : city;
       });
-      dispatch(setCityListDataAction(updatedCityData));
+      dispatch(
+        setCityListDataAction(updatedCityData.sort(cityDataSortFunction))
+      );
       cityWeatherService.toggleFavourite(cityId);
     } catch (e) {
       console.error(e);

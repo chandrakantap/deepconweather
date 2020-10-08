@@ -12,6 +12,7 @@ describe("cityWeatherService", () => {
       ]'
     );
     cityWeatherService.addCity({
+      id: "TOKYO_TOKYO_JAPAN",
       name: "TokYo",
       region: "Tokyo",
       country: "Japan",

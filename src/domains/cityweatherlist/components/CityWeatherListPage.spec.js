@@ -9,39 +9,41 @@ import { render } from "common/test-utils";
 import CityWeatherListPage from "./CityWeatherListPage";
 import * as weatherStackApi from "services/weatherStackApi";
 
+const getCityWeatherMockFn = (cityName) => {
+  const cityData = cityName.split("_");
+  return Promise.resolve({
+    name: cityData[0],
+    region: cityData[1],
+    country: cityData[2],
+    current: {
+      observation_time: "02:21 PM",
+      temperature: 32,
+      weather_code: 113,
+      weather_icons: [
+        "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png",
+      ],
+      weather_descriptions: ["Sunny"],
+      wind_speed: 17,
+      wind_degree: 250,
+      wind_dir: "WSW",
+      pressure: 1006,
+      precip: 0,
+      humidity: 75,
+      cloudcover: 0,
+      feelslike: 31,
+      uv_index: 8,
+      visibility: 6,
+      is_day: "yes",
+    },
+  });
+};
+
 describe("CityWeatherListPage", () => {
   let getCityWeatherSpy;
   beforeAll(() => {
     getCityWeatherSpy = jest
       .spyOn(weatherStackApi, "getCityWeather")
-      .mockImplementation((cityName) => {
-        const cityData = cityName.split("_");
-        return Promise.resolve({
-          name: cityData[0],
-          region: cityData[1],
-          country: cityData[2],
-          current: {
-            observation_time: "02:21 PM",
-            temperature: 32,
-            weather_code: 113,
-            weather_icons: [
-              "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png",
-            ],
-            weather_descriptions: ["Sunny"],
-            wind_speed: 17,
-            wind_degree: 250,
-            wind_dir: "WSW",
-            pressure: 1006,
-            precip: 0,
-            humidity: 75,
-            cloudcover: 0,
-            feelslike: 31,
-            uv_index: 8,
-            visibility: 6,
-            is_day: "yes",
-          },
-        });
-      });
+      .mockImplementation(getCityWeatherMockFn);
   });
   afterEach(() => {
     cleanup();
@@ -101,7 +103,7 @@ describe("CityWeatherListPage", () => {
     fireEvent.click(screen.queryByTestId("TOKYO_TOKYO_JAPAN_favBtn"));
     expect(container).toMatchSnapshot();
   });
-  test("should add new city to list", async () => {
+  test("should open details page on click search city item", async () => {
     window.localStorage.setItem(
       "LIST_PAGE_CITIES_SK",
       '[\
@@ -116,7 +118,9 @@ describe("CityWeatherListPage", () => {
         id: "YORK_LANCASHIRE_UNITED KINGDOM",
       },
     ]);
-    const { container } = render(<CityWeatherListPage />);
+    const historyMock = { push: jest.fn() };
+    const { container } = render(<CityWeatherListPage history={historyMock} />);
+
     await waitForDomChange();
     const searchInput = screen.getByPlaceholderText("Search for cities...");
     fireEvent.change(searchInput, { target: { value: "york" } });
@@ -125,9 +129,6 @@ describe("CityWeatherListPage", () => {
     expect(screen.queryByText("York, Lancashire, United Kingdom")).toBeTruthy();
     fireEvent.click(screen.queryByText("York, Lancashire, United Kingdom"));
 
-    await waitForDomChange();
-    expect(
-      container.querySelectorAll("main.cityList section.root").length
-    ).toBe(2);
+    expect(historyMock.push).toHaveBeenCalled();
   });
 });

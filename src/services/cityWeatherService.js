@@ -52,16 +52,11 @@ function removeCity(cityId) {
 }
 
 function addCity(newCity) {
-  const listPageCities = getCityList();
-  const cityToAdd = { ...newCity };
-  if (!cityToAdd.id || cityToAdd.id === "undefined") {
-    cityToAdd.id = `${newCity.name}_${newCity.region}_${newCity.country}`.toLocaleUpperCase();
-  }
-  const existing = listPageCities.find((city) => city.id === cityToAdd.id);
-  if (!existing) {
-    const updatedCityData = [...listPageCities, cityToAdd];
-    localStorage.setItem(LIST_PAGE_CITIES_SK, JSON.stringify(updatedCityData));
-  }
+  const currentCities = getCityList().filter((city) => city.id !== newCity.id);
+  localStorage.setItem(
+    LIST_PAGE_CITIES_SK,
+    JSON.stringify([...currentCities, newCity])
+  );
 }
 
 export default {

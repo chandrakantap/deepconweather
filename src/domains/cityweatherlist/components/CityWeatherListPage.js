@@ -8,7 +8,6 @@ import {
   loadCityListAction,
   toggleFavouriteAction,
   removeCityAction,
-  addCityToListAction,
 } from "domains/cityweatherlist/store/cityWeatherListPageActions";
 import {
   cityListSelector,
@@ -25,7 +24,7 @@ const selector = createSelector(
   })
 );
 
-function CityWeatherListPage() {
+function CityWeatherListPage({ history }) {
   const dispatch = useDispatch();
   const { cityList, isCityListLoaded } = useSelector(selector);
 
@@ -39,8 +38,10 @@ function CityWeatherListPage() {
   const onClickRemove = (city) => {
     dispatch(removeCityAction(city.id));
   };
-  const addNewCityToList = (city) => {
-    dispatch(addCityToListAction(city));
+  const onSelectCity = (city) => {
+    history.push(
+      `/detail?cityId=${city.id}&cityName=${city.name}&region=${city.region}&country=${city.country}`
+    );
   };
 
   if (!isCityListLoaded) {
@@ -58,7 +59,7 @@ function CityWeatherListPage() {
       </header>
       <main className={styles.cityList}>
         <div className={styles.citySearchContainer}>
-          <CitySearch onSelect={addNewCityToList} />
+          <CitySearch onSelectCity={onSelectCity} />
         </div>
         {cityList.map((city) => (
           <SingleCityInfo

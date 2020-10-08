@@ -41,7 +41,7 @@ export default function (state = initialState, action) {
       const currentCities = state.data.filter((city) => city.id !== newCity.id);
       return {
         ...state,
-        data: [newCity, ...currentCities],
+        data: [...currentCities, newCity],
       };
     }
     default: {

@@ -8,6 +8,7 @@ const initialState = {
 
 export const ACTION_TYPES = {
   SET_IS_LOADED: "CITY_DETAIL_SET_IS_LOADED",
+  TOGGLE_FAVOURITE: "CITY_DETAIL_TOGGLE_FAVOURITE",
   SET_DATA: "CITY_DETAIL_SET_DATA",
   SET_ERROR: "CITY_DETAIL_SET_ERROR",
   CLEAR: "CITY_DETAIL_CLEAR_STATE",
@@ -20,6 +21,15 @@ export default function (state = initialState, action) {
         ...state,
         isLoaded: true,
         data: action.data,
+      };
+    }
+    case ACTION_TYPES.TOGGLE_FAVOURITE: {
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          isFavourite: !state.data.isFavourite,
+        },
       };
     }
     case ACTION_TYPES.SET_ERROR: {

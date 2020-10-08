@@ -1,5 +1,6 @@
 import { ACTION_TYPES } from "./cityWeatherDetailPageReducer";
 import { cityListSelector } from "domains/cityweatherlist/store/cityWeatherListPageSelectors";
+import { addCityToListAction } from "domains/cityweatherlist/store/cityWeatherListPageActions";
 import { cityWeatherDetailsSelector } from "./cityWeatherDetailPageSelectors";
 import cityWeatherService from "services/cityWeatherService";
 
@@ -40,6 +41,19 @@ export function loadCityWeatherDetailAction({
           "Unable to load city weather details"
         )
       );
+    }
+  };
+}
+
+export function toggleFavouriteAction() {
+  return (dispatch, getState) => {
+    dispatch({ type: ACTION_TYPES.TOGGLE_FAVOURITE });
+
+    const state = getState();
+    const city = cityWeatherDetailsSelector(state);
+    if (city.isFavourite) {
+      cityWeatherService.addCity(city);
+      dispatch(addCityToListAction(city));
     }
   };
 }

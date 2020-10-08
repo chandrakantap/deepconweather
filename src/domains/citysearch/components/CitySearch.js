@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import SearchInput from "./SearchInput";
 import Throbber from "common/ui/Throbber";
-import { MdDone } from "react-icons/md";
 import { locationLookup } from "services/weatherStackApi";
 import styles from "./CitySearch.module.css";
 
-function CitySearch({ onSelect }) {
+function CitySearch(props) {
   const [results, setResults] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
@@ -15,13 +14,20 @@ function CitySearch({ onSelect }) {
     if (searchQuery.length === 0) {
       setLoading(false);
       setResults([]);
+    } else if (!navigator.onLine) {
+      setResults([
+        {
+          name:
+            "Seems you are offline. Please connect to internet and try again",
+          id: "NO_RES",
+        },
+      ]);
     } else {
       setLoading(true);
       const results = await locationLookup(searchQuery);
       if (results.length === 0) {
         results.push({
           name: "No results found",
-          country: "",
           id: "NO_RES",
         });
       }
@@ -34,14 +40,8 @@ function CitySearch({ onSelect }) {
     if (id === "NO_RES") {
       return;
     }
-    const updatedResults = results.map((city) => {
-      if (city.id === id) {
-        onSelect(city);
-        return { ...city, current: {}, added: true };
-      }
-      return city;
-    });
-    setResults(updatedResults);
+    const city = results.find((city) => city.id === id);
+    props.onSelectCity(city);
   };
 
   return (
@@ -58,15 +58,10 @@ function CitySearch({ onSelect }) {
               onClick={onSelectCity}
             >
               <span>
-                {city.region
-                  ? `${city.name}, ${city.region}, ${city.country}`
-                  : `${city.name}, ${city.country}`}
+                {city.name}
+                {city.region ? `, ${city.region}` : null}
+                {city.country ? `, ${city.country}` : null}
               </span>
-              {city.added && (
-                <span>
-                  <MdDone />
-                </span>
-              )}
             </button>
           ))}
         </div>
