@@ -30,7 +30,6 @@ export function loadCityWeatherDetailAction({
           region,
           country,
         };
-        cityWeatherService.addCity(newCity);
         const data = await cityWeatherService.getCityWeatherDetail(newCity);
         dispatch(setCityWeatherDetailsAction(data));
       }

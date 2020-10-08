@@ -27,10 +27,14 @@ export function loadCityListAction() {
       } else {
         const cityList = cityWeatherService.getCityList();
         dispatch(setCityListDataAction(cityList.sort(cityDataSortFunction)));
-        const cityListWithWeather = await cityWeatherService.getListPageCitiesData();
-        dispatch(
-          setCityListDataAction(cityListWithWeather.sort(cityDataSortFunction))
-        );
+        if (navigator.onLine) {
+          const cityListWithWeather = await cityWeatherService.refreshCityListWeather();
+          dispatch(
+            setCityListDataAction(
+              cityListWithWeather.sort(cityDataSortFunction)
+            )
+          );
+        }
       }
     } catch (e) {
       console.error(e);

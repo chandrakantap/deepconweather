@@ -12,7 +12,7 @@ function getCityList() {
     listPageCities = topCitiesByPopulation.slice(0, 15).map((city) => ({
       ...city,
       isFavourite: false,
-      current: {},
+      current: { weather_descriptions: ["-"] },
       id: `${city.name}_${city.region}_${city.country}`
         .toLocaleUpperCase()
         .replace(/[ ]*/g, ""),
@@ -24,17 +24,19 @@ function getCityList() {
   return listPageCities;
 }
 
+async function refreshCityListWeather() {
+  const cities = getCityList();
+  const refreshedCityList = await Promise.all(
+    cities.map((city) => getCityWeatherDetail(city))
+  );
+  localStorage.setItem(LIST_PAGE_CITIES_SK, JSON.stringify(refreshedCityList));
+  return refreshedCityList;
+}
+
 async function getCityWeatherDetail(city) {
   const query = `${city.name},${city.region},${city.country}`;
   const { current } = await getCityWeather(query);
   return { ...city, current };
-}
-
-async function getListPageCitiesData() {
-  const listPageCities = getCityList();
-  return await Promise.all(
-    listPageCities.map((city) => getCityWeatherDetail(city))
-  );
 }
 
 function toggleFavourite(cityId) {
@@ -64,8 +66,8 @@ function addCity(newCity) {
 
 export default {
   getCityList,
+  refreshCityListWeather,
   getCityWeatherDetail,
-  getListPageCitiesData,
   toggleFavourite,
   addCity,
   removeCity,

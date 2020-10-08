@@ -13,6 +13,7 @@ import {
   cityListSelector,
   isCityListLoadedSelector,
 } from "domains/cityweatherlist/store/cityWeatherListPageSelectors";
+import OnlineIndicator from "common/ui/OnlineIndicator";
 import styles from "./CityWeatherListPage.module.css";
 
 const selector = createSelector(
@@ -56,6 +57,7 @@ function CityWeatherListPage({ history }) {
     <section>
       <header className={styles.header}>
         <h1>City Weather Info</h1>
+        <OnlineIndicator />
       </header>
       <main className={styles.cityList}>
         <div className={styles.citySearchContainer}>

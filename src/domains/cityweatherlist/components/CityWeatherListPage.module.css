@@ -2,6 +2,12 @@
   padding: 1rem 4rem;
   position: absolute;
   top: 0;
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  color: white;
+  font-size: 1.5rem;
+  grid-gap: 1.5rem;
+  align-items: center;
 }
 .header h1 {
   font-weight: 500;
